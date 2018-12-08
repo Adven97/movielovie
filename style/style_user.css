@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC');
+@import url('https://fonts.googleapis.com/css?family=Mukta');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+h1 {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 800;
+  font-family: 'Mukta', sans-serif;
+}
+ul{
+  margin-top: 60px;
+    list-style: none;
+}
+p{
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+}
+.avatar{
+  float: left;
+
+}
+.info{
+  width:450px;
+  margin-left: 200px;
+}
+.uper{
+  height:65px;
+  /* background-color: cyan; */
+}
+span{
+  font-size: 18px;
+  margin-left: 40px;
+  font-family: 'Mukta', sans-serif;
+}

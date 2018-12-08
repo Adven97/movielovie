@@ -1,0 +1,253 @@
+INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
+(25, 'Steve', 'Carell', '1962-08-16', 'USA'),
+(26, 'Jenna', 'Fischer', '1974-03-07', 'USA'),
+(27, 'Rainn', 'Wilson', '1966-01-20', 'USA'),
+(28, 'Leslie David', 'Baker', '1958-02-19', 'USA'),
+(29, 'Kate', 'Flannery', '1964-06-10', 'USA'),
+(30, 'Angela', 'Kinsey', '1971-06-25', 'USA'),
+(31, 'Brian', 'Baumgartner', '1972-11-29', 'USA'),
+(32, 'Phyllis', 'Smith', '1951-07-10', 'USA'),
+(33, 'Ed', 'Helms', '1974-01-24', 'USA'),
+(34, 'David', 'Koechner', '1962-01-24', 'USA'),
+(35, 'Zach', 'Woods', '1984-09-25', 'USA'),
+(36, 'Catherine', 'Tate', '1968-05-12', 'Anglia'),
+(37, 'Kathy', 'Bates', '1948-06-28', 'USA'),
+(38, 'David', 'Denman', '1973-07-25', 'USA'),
+(39, 'Paul', 'Lieberstein', '1967-02-22', 'USA'),
+(40, 'Amy', 'Ryan', '1968-05-03', 'USA'),
+(41, 'Melora', 'Hardin', '1967-06-29', 'USA'),
+(42, 'Clark', 'Duke', '1985-05-05', 'USA'),
+(43, 'Jake', 'Lacy', '1985-02-14', 'USA'),
+(44, 'B.J.', 'Novak', '1979-07-31', 'USA'),
+(45, 'Oscar', 'Nunez', '1958-11-18', 'Kuba'),
+(46, 'Mindy', 'Kaling', '1979-06-24', 'USA'),
+(47, 'James', 'Spader', '1960-02-07', 'USA'),
+(48, 'Craig', 'Robinson', '1971-10-25', 'USA'),
+(49, 'Ellie', 'Kemper', '1980-05-02', 'USA'),
+(50, 'Stephen', 'Merchant', '1974-11-24', 'Anglia'),
+(51, 'Ricky', 'Gervais', '1961-06-25', 'Anglia');
+
+
+
+
+(NULL, 'Greg', 'Daniels', '1963-06-13', 'USA'),
+(NULL, 'Michael', 'Schur', '1975-10-29', 'USA'),
+
+(NULL, 'Retta', '', '1971-09-14', 'USA'),
+(NULL, 'Aziz', 'Ansari', '1983-02-23', 'USA'),
+(NULL, 'Rashida', 'Jones', '1976-02-25', 'USA'),
+(NULL, 'Nick', 'Offerman', '1970-06-26', 'USA'),
+(NULL, 'Aubrey', 'Plaza', '1984-06-26', 'USA'),
+(NULL, 'Paul', 'Schneider', '1976-03-16', 'USA'),
+(NULL, 'Jim ', 'OHeir', '1962-02-04', 'USA'),
+(NULL, 'Chris', 'Pratt', '1979-06-21', 'USA'),
+(NULL, 'Jama', 'Williamson', '1974-02-12', 'USA'),
+(NULL, 'Louis', 'C.K.', '1967-09-12', 'USA'),
+(NULL, 'Jason', 'Mantzoukas', '1972-12-18', 'USA'),
+(NULL, 'Adam', 'Scott', '1973-04-03', 'USA'),
+(NULL, 'Rob', 'Lowe', '1964-03-17', 'USA'),
+(NULL, 'Mo', 'Collins', '1965-07-07', 'USA'),
+(NULL, 'Ben', 'Schwartz', '1981-09-15', 'USA'),
+(NULL, 'Megan', 'Mullally', '1958-11-12', 'USA');
+
+
+
+
+INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
+(NULL, 'Emma', 'Stone', '1988-11-06', 'USA'),
+(NULL, 'Abigail', 'Breslin', '1996-04-14', 'USA'),
+(NULL, 'Amber', 'Heard', '1986-04-22', 'USA'),
+(NULL, 'Bill', 'Murray', '1986-04-22', 'USA'),
+(NULL, 'Derek', 'Graf', '1980-08-25', 'USA');
+
+
+INSERT INTO `cast` (`id`, `name`, `last_name`, `role`, `title`) VALUES
+('8', 'Emily', 'Blunt', 'Evelyn Abbott', 'Ciche miejsce'),
+('9', 'John', 'Krasinski', 'Lee Abbott', 'Ciche miejsce'),
+(NULL, 'Millicent', 'Simmonds', 'Regan Abbott', 'Ciche miejsce'),
+(NULL, 'Noah', 'Jupe', 'Marcus Abbott', 'Ciche miejsce'),
+(NULL, 'Cade', 'Woodward', 'Beau Abbott', 'Ciche miejsce'),
+(NULL, 'Leon', 'Russom', 'Mężczyzna w lesie', 'Ciche miejsce');
+
+
+INSERT INTO `cast` (`id`, `name`, `last_name`, `role`, `title`) VALUES
+(null, (select name FROM artist WHERE name = 'Brian'),
+ (select last_name FROM artist WHERE last_name = 'Baumgartner'),
+'Kevin Malone',
+(SELECT titles from movies_and_series where titles='The Office(US)'))
+
+('15', (select name FROM artist WHERE name = 'Emily'),
+ (select last_name FROM artist WHERE last_name = 'Blunt'),
+'Evelyn Abbott',
+(SELECT titles from movies_and_series where titles='Ciche miejsce'))
+
+('15', (select name FROM artist WHERE name = 'Emily'),
+ (select last_name FROM artist WHERE last_name = 'Blunt'),
+'Evelyn Abbott',
+(SELECT titles from movies_and_series where titles='Ciche miejsce'))
+
+
+
+INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
+(52, 'James', 'Franco', '1978-04-19', 'USA'),
+(53, 'Dave', 'Franco', '1985-06-12', 'USA'),
+(54, 'Robert', 'Downey Jr.', '1965-04-04', 'USA'),
+(55, 'Scarlett', 'Johansson', '1984-11-22', 'USA'),
+(56, 'Chris', 'Evans', '1981-06-13', 'USA'),
+(57, 'Chris', 'Hemsworth', '1983-08-11', 'Australia'),
+(58, 'Tom', 'Hiddleston', '1981-02-09', 'Anglia'),
+(59, 'Samuel L.', 'Jackson', '1948-12-21', 'USA'),
+(60, 'Benedict', 'Cumberbatch', '1976-07-19', 'Anglia'),
+(61, 'Tom', 'Cruise', '1962-07-03', 'USA'),
+(62, 'Simon', 'Pegg', '1970-02-14', 'Anglia'),
+(63, 'Edgar', 'Wright', '1974-04-18', 'Anglia'),
+(64, 'Quentin', 'Tarantino', '1963-03-27', 'USA'),
+(65, 'Martin', 'Scorsese', '1942-11-17', 'USA'),
+(66, 'Christopher', 'Nolan', '1970-07-30', 'Anglia'),
+(67, 'David', 'Fincher', '1962-08-28', 'USA'),
+(68, 'Steven', 'Spielberg', '1946-12-18', 'USA'),
+(69, 'Robert', 'Zemeckis', '1951-05-14', 'USA'),
+(70, 'Damien', 'Chazelle', '1985-01-19', 'USA'),
+(71, 'James', 'Gunn', '1970-08-05', 'USA'),
+(72, 'Taika', 'Waititi', '1975-08-16', 'USA'),
+
+
+INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
+(NULL, 'Mary Elizabeth', 'Winstead', '1984-11-28', 'USA'),
+(NULL, 'John', 'Gallagher Jr.', '1984-06-17', 'USA'),
+(NULL, 'Douglas M.', 'Griffin', '1966-11-17', 'USA'),
+(NULL, 'Suzanne', 'Cryer', '1967-01-13', 'USA'),
+(NULL, 'Bradley', 'Cooper', '1975-01-05', 'USA'),
+(NULL, 'Sumalee', 'Montano', '1972-08-03', 'USA'),
+(NULL, 'Frank', 'Mottek', '1972-88-03', 'USA'),
+
+alter table fuinfo drop index email;
+
+INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
+(NULL, 'Dan', 'Trachtenberg', '1981-5-11', 'USA'),
+(NULL, 'Matthew', 'Stuecken', '0000-00-77', 'USA'),
+(NULL, 'Josh', 'Campbell', '1966-41-67', 'USA'),
+(NULL, 'Jeff', 'Cutter', '1967-71-13', 'USA'),
+(NULL, 'Bear', 'McCreary', '1979-02-17', 'USA'),
+(NULL, 'Stefan', 'Grube', '1972-78-03', 'USA');
+
+
+INSERT INTO `crew` (`id`, `name`, `last_name`, `credit`, `title`) VALUES
+(2, 'Rhett', 'Reese', 'scenariusz', 'Zombieland'),
+(3, 'Paul', 'Wernick', 'scenariusz', 'Zombieland'),
+(4, 'Michael', 'Bonvillain', 'zdjęcia', 'Zombieland'),
+(5, 'David', 'Sardy', 'muzyka', 'Zombieland'),
+(6, 'Alan', 'Baumgarten', 'montaż', 'Zombieland');
+
+
+
+
+INSERT INTO `movies` (`id`, `movie_title`, `org_title`, `release_date`, `runtime`, `country`, `avg_grade`, `nom_of_grades`, `synopsis`, `streaming`) VALUES ('2', 'Ciche miejsce', 'A Quiet Place', '2018-4-13', '95', 'USA', '0', '0', 'Ciche miejsce to wstrząsająca opowieść o czteroosobowej rodzinie Abbotów zmuszonej do porozumiewania się w całkowitej ciszy, bez używania słów, czy choćby najmniejszego dźwięku. Całe ich życie, życie w ciągłym, nieprzerwanym napięciu, koncentruje się na tym, by nie wydawać i nie generować żadnych dźwięków. Każdy bowiem może okazać się dla nich śmiertelny, po tym, jak tajemnicze istoty – reagujące na każdy dźwięk – zagrażają przetrwaniu ludzi. Jeśli cię usłyszą, wytropią cię...', NULL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link rel="stylesheet" href="style/style_register.css" type="text/css">
+  <title>Document</title>
+</head>
+<body>
+<div class="box"></div>
+    <div class="login">
+    <form action="" method="post">
+      <h1 class="hhh">Rejestracja</h2>
+      <input class="inp" type="text" name="imie" placeholder="Imię" /> </br/></br/>
+      <input class="inp" type="text" name="nazwisko" placeholder="Nazwisko" /> </br/></br/>
+      <input class="inp" type="text" name="login" placeholder="Login" /> </br/></br/>
+      <input class="inp" type="text" name="email" placeholder="E-Mail" /> </br/></br/>
+      <input class="inp" type="text" name="tel" placeholder="Numer telefonu" /> </br/></br/>
+      <input class="inp" type="password" name="haslo" placeholder="Hasło" /></br/></br/>
+      <input class="inp" type="password" name="haslo2" placeholder="Powtórz Hasło" />
+      <br /><br />
+      <input class="btn" type="submit" value="Zarejestruj się">
+    </form>
+    </div>
+<?php
+
+require_once 'connect.php';
+
+    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+
+    if($polaczenie->connect_errno !=0){
+      echo "Error ".$polaczenie->connect_errno;
+    }
+    else {
+      $imie = $_POST['imie'];
+      $nazwisko = $_POST['nazwisko'];
+      $login = $_POST['login'];
+      $email = $_POST['email'];
+      $tel = $_POST['tel'];
+      $haslo = $_POST['haslo'];
+      $haslo2 = $_POST['haslo2'];
+
+      $imie=htmlentities($imie, ENT_QUOTES, "UTF-8");
+      $nazwisko=htmlentities($nazwisko, ENT_QUOTES, "UTF-8");
+      $login=htmlentities($login, ENT_QUOTES, "UTF-8");
+      $email=htmlentities($email, ENT_QUOTES, "UTF-8");
+      $tel=htmlentities($tel, ENT_QUOTES, "UTF-8");
+      $haslo=htmlentities($haslo, ENT_QUOTES, "UTF-8");
+      $haslo2=htmlentities($haslo2, ENT_QUOTES, "UTF-8");
+
+      if(strlen($imie) >0 && strlen($nazwisko) >0 && strlen($login) >0 && strlen($email) >0 && strlen($tel) >0 && strlen($haslo) >0 && strlen($haslo2) >0){
+
+        if($haslo == $haslo2){
+          $query1="SELECT * FROM users WHERE login='$login' OR password='$haslo' OR telefon='$tel'";
+          if(@$polaczenie->query($query1)->num_rows == 0){
+
+      $sql="INSERT INTO users (id, name, last_name, login, email, telefon, password, time_spent, movies_watched) VALUES (NULL, '$imie', '$nazwisko', '$login', '$email', '$tel', '$haslo', '0','0')";
+
+      if($rezultat =@$polaczenie->query($sql) ){
+
+          $_SESSION['zalogowany']=true;
+
+          $_SESSION['login']=$login;
+          $_SESSION['name']= $imie;
+          $_SESSION['last_name']= $nazwisko;
+          $_SESSION['time_spent']= 0;
+          $_SESSION['movies_watched']= 0;
+
+          $rezultat->free_result();
+          header('Location: user.php');
+
+      }
+      $polaczenie->close();
+    }
+      else{
+        echo "w bazie juz jest taki user xD";
+      }
+    }
+    else{
+      echo 'hasła są nie zgodne';
+    }
+  }
+    else{
+      echo 'wyełnij wszystkie pola!';
+    }
+  }
+ ?>
+</body>
+</html>

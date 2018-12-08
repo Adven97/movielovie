@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC');
+
+body{
+  background-image: url("img/cover_thumb.jpg");
+  background-position: center;
+  background-size: cover;
+  margin: 0 0px;
+  padding: 0px;
+}
+#container{
+  margin-left: auto;
+  margin-right: auto;
+}
+#main{
+  box-shadow: -10px 0 10px -10px #333, 10px 0 10px -10px #333;
+  width: 88%;
+  margin-top: 0px;
+  padding-top: 0px;
+  min-height: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:  #C8C8C8;
+}
+
+h2{
+  text-align: center;
+  font-family: 'Bungee', cursive;
+  font-size: 30px;
+}
+
+.newsfeed{
+  width:600px;
+  height:350px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 23px;
+}
+p{
+  font-family: 'Crimson Text', serif;
+  font-size: 22px;
+}
+.film{
+  text-align: center;
+  font-size: 25px;
+}

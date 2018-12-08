@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC');
+@import url('https://fonts.googleapis.com/css?family=Mukta');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+
+#container{
+  margin-left: auto;
+  margin-right: auto;
+}
+#main{
+  box-shadow: -10px 0 10px -10px #333, 10px 0 10px -10px #333;
+  width: 88%;
+  margin-top: 0px;
+  padding-top: 0px;
+  min-height: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:  #C8C8C8;
+}
+
+
+.poster{
+  float: left;
+}
+
+.info-box{
+  width:500px;
+
+  float: left;
+  margin-left: 50px;
+/*  background-color: #987abd;*/
+}
+
+h1.title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 800;
+  font-family: 'Mukta', sans-serif;
+}
+ul{
+  margin-left: 20px;
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+  }
+
+p.credit{
+  font-size: 19px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  color: #FFC404;
+}
+a.person{
+  font-weight:normal;
+  margin-left: 12px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  color: #000000;
+}
+span.runtime{
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.obsada{
+  font-family: 'Poppins', sans-serif;
+
+  width:600px;
+  height:700px;
+  margin-left: 320px;
+  margin-top: 500px;
+  / background-color: #9900ad; */
+}
+p.pcast{
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+
+}
+a.pcast{
+  /* font-size: 15px; */
+  color: #FF0033;
+  text-decoration: none;
+}
+
+a.pcast:hover{
+  color: #FF0000;
+  text-decoration: underline;
+  font-weight: bold;
+}

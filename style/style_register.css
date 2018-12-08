@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body{
+    background-image: url("img/moviebg.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 0px;
+    padding: 0px;
+    }
+
+    #container{
+          margin-left: auto;
+          margin-right: auto;
+        }
+    #main{
+          width: 88%;
+          margin-top: 0px;
+          padding-top: 0px;
+          min-height: 1700px;
+          margin-left: auto;
+          margin-right: auto;
+          background-color:  #C8C8C8;
+        }
+
+        .box{
+            border-radius: 12px;
+            background-color: #546576;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:60px;
+            width: 500px;
+            height:650px;
+        }
+
+        .login{
+          font-family: 'Raleway', sans-serif;
+          margin-top:10px;
+          position: absolute;
+          margin-left: 50px;
+          height: 250px;
+        }
+
+        .inp{
+          font-family: 'Raleway', sans-serif;
+          font-size: 16px;
+          border-style: hidden hidden solid hidden;
+        /*  border-style: none;*/
+          border-color: #101010;
+          background-color: #546576;
+          opacity: 0.9;
+          height: 35px;
+          width: 400px;
+        }
+        h1.hhh{
+          font-family: 'Raleway', sans-serif;
+          font-size: 38px;
+          text-align: center;
+        }
+        .btn{
+          font-size: 16px;
+          background-color: #c8c8c8;
+          border-radius: 7px;
+          font-family: 'Raleway', sans-serif;
+          margin-top: 35px;
+          width: 400px;
+          height: 50px;
+          margin-left: auto;
+        }
+        .btn:hover{
+          background-color: #b7b7b7;
+          cursor: pointer;
+        }ursor: pointer;
+}
