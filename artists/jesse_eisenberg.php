@@ -11,95 +11,22 @@ require_once '../connect.php';
     }
     else {
       $mainid =1;
-      $director = "reżyseria";
-      $writer ="scenariusz";
+      $artist_name ="Jesse";
+      $artist_lname ="Eisenberg";
+      $img_name="jesse_eisenberg";
 
-      $sql="SELECT * FROM movies WHERE id='$mainid'";
-      if($rezultat =@$polaczenie->query($sql) ){
+      //$sql="SELECT * FROM artist WHERE name='$artist_name' and last_name='$artist_lname'";
+      if($rezultat =@$polaczenie->query("SELECT * FROM artist WHERE name='$artist_name' and last_name='$artist_lname'") ){
         if($rezultat->num_rows>0){
           $wiersz = $rezultat->fetch_assoc();
 
-          $tytul=$wiersz['movie_title'];
-          $runtime = $wiersz['runtime'];
-          $data= $wiersz['release_date'];
-          $date = DateTime::createFromFormat("Y-m-d", $data);
-          $d = $date->format("Y");
+          $data= $wiersz['birth_day'];
+          $country = $wiersz['country'];
 
-              }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+        }else{echo "<script type='text/javascript'>alert('niepyklo 1');</script>";}
 
           $rezultat->free_result();
         }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
-
-
-        $query2="SELECT * FROM crew WHERE title='$tytul' and credit='$director' ";
-        if($rezultat2 =@$polaczenie->query($query2) ){
-          if($rezultat2->num_rows>0){
-            $i=0;
-            while($wiersz2 = $rezultat2->fetch_assoc()){
-
-              $director_name[$i] = $wiersz2['name'];
-              $director_lname[$i] = $wiersz2['last_name'];
-
-              $i=$i+1;
-            }
-            $directorzy="";
-            for ($x = 0; $x < $i; $x++) {
-             $directorzy .= " $director_name[$x] $director_lname[$x] ,";
-           }
-           $directorzy =substr($directorzy, 0, -2);
-
-          }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
-          $rezultat2->free_result();
-        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
-
-
-        $query3="SELECT * FROM crew WHERE title='$tytul' and credit='$writer' ";
-        if($rezultat3 =@$polaczenie->query($query3) ){
-          if($rezultat3->num_rows>0){
-
-          $i=0;
-          while($wiersz3 = $rezultat3->fetch_assoc()){
-
-            $writer_name[$i] = $wiersz3['name'];
-            $writer_lname[$i] = $wiersz3['last_name'];
-
-            $i=$i+1;
-          }
-          $scenary="";
-          for ($x = 0; $x < $i; $x++) {
-           $scenary .= " $writer_name[$x] $writer_lname[$x] ,";
-         }
-         $scenary =substr($scenary, 0, -2);
-
-
-          }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
-          $rezultat3->free_result();
-        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
-
-
-        $query4="SELECT * FROM cast WHERE title='$tytul'";
-        if($rezultat4 =@$polaczenie->query($query4) ){
-          if($rezultat4->num_rows>0){
-
-          $i=0;
-          while($wiersz4 = $rezultat4->fetch_assoc()){
-
-            $actor_name[$i] = $wiersz4['name'];
-            $actor_lname[$i] = $wiersz4['last_name'];
-            $role[$i] = $wiersz4['role'];
-
-            $i=$i+1;
-          }
-          $obsada="";
-          for ($x = 0; $x < $i; $x++) {
-           $obsada .= "<li><p><a href=''>$actor_name[$x] $actor_lname[$x]</a> - $role[$x]</p></li>";
-         }
-
-
-          }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
-          $rezultat4->free_result();
-        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
-
 
         $polaczenie->close();
         }
@@ -135,9 +62,27 @@ require_once '../connect.php';
     </div>
   </div>
   <div style="clear:both"></div>
+<?php
+echo<<<END
     <div class="poster">
-     <img src='../style/img/jesse_eisenberg.jpg' style='max-width: 214px; max-height: 317px;' />
+     <img src='../style/img/$img_name.jpg' style='max-width: 214px; max-height: 317px;' />
     </div>
+
+    <div class="info-box">
+    <h1 class="title">$artist_name $artist_lname</h1>
+
+    <ul>
+      <li><p class="credit">Data Urodzenia: <a class="person">$data</a> </p></li>
+      <li><p class="credit">Kraj Pochodzenia: <a class="person">$country</a></p></li>
+    </ul>
+
+    </div>
+    <div class="obsada">
+      <h1 class="title">Filmografia</h1>
+      <ul>tu bedzie filmografia</ul>
+    </div>
+END
+    ?>
 
 </div>
 
