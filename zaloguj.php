@@ -42,8 +42,8 @@ require_once 'connect.php';
           header('Location: user.php');
         }
         else{
-          $_SESSION['blad']='<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-          header('Location: chuj.php');
+          $_SESSION['blad']='<div class="error">Nieprawidłowy login lub hasło!</div>';
+          header('Location: login.php');
         }
       }
       $polaczenie->close();

@@ -20,7 +20,23 @@ if (isset($_POST['email']))
         if ((strlen($login)<3) || (strlen($login)>20))
         {
             $wszystko_OK=false;
-            $_SESSION['e_login']="login musi posiadać od 3 do 20 znaków!";
+            $_SESSION['e_login']="Login musi posiadać od 3 do 20 znaków!";
+        }
+
+        if (strlen($tel)<3)
+        {
+            $wszystko_OK=false;
+            $_SESSION['e_tel']="Proszę podać poprawny numer telefonu";
+        }
+        if (strlen($imie)<2)
+        {
+            $wszystko_OK=false;
+            $_SESSION['e_imie']="Proszę podać imię";
+        }
+        if (strlen($nazwisko)<2)
+        {
+            $wszystko_OK=false;
+            $_SESSION['e_nazwisko']="Proszę podać nazwisko";
         }
 
         if ((filter_var($emailB, FILTER_VALIDATE_EMAIL)==false) || ($emailB!=$email))
@@ -93,7 +109,7 @@ if (isset($_POST['email']))
                     }
 
               if ($wszystko_OK==true){
-                $sql="INSERT INTO users (id, name, last_name, login, email, telefon, password, time_spent, movies_watched,lucky_number) VALUES (NULL, '$imie', '$nazwisko', '$login', '$email', '$tel', '$haslo', '0','0','$lucky_num')";
+                $sql="INSERT INTO users (id, name, last_name, login, email, telefon, password, time_spent, movies_watched,lucky_number) VALUES (NULL, '$imie', '$nazwisko', '$login', '$email', '$tel', '$haslo1', '0','0','$lucky_num')";
 
                 if($rezultat =@$polaczenie->query($sql) ){
                   $_SESSION['zalogowany']=true;
@@ -133,7 +149,8 @@ if (isset($_POST['email']))
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style/style_register.css" type="text/css">
   <link rel="stylesheet" href="style/pasek.css" type="text/css">
-  <title>Document</title>
+  <title>Rejestracja</title>
+
 </head>
 <body>
   <div id="container">
@@ -158,9 +175,22 @@ if (isset($_POST['email']))
     <form method="post">
       <h1 class="hhh">Rejestracja</h2>
       <input class="inp" type="text" name="imie" onkeyup="lettersOnly(this)" placeholder="Imię" /><br /><br />
+      <?php
+          if (isset($_SESSION['e_imie']))
+          {
+              echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
+              unset($_SESSION['e_imie']);
+          }
+      ?>
       <input class="inp" type="text" name="nazwisko" onkeyup="lettersOnly(this)"  placeholder="Nazwisko" /> </br/></br/>
+      <?php
+          if (isset($_SESSION['e_nazwisko']))
+          {
+              echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
+              unset($_SESSION['e_nazwisko']);
+          }
+      ?>
       <input class="inp" type="text" placeholder="Login" name="login" /><br /><br />
-
         <?php
             if (isset($_SESSION['e_login']))
             {
@@ -182,7 +212,7 @@ if (isset($_POST['email']))
       <?php
           if (isset($_SESSION['e_tel']))
           {
-              echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+              echo '<div class="error">'.$_SESSION['e_tel'].'</div>';
               unset($_SESSION['e_tel']);
           }
       ?>

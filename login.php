@@ -10,7 +10,17 @@ session_start();
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style/style_login.css" type="text/css">
   <link rel="stylesheet" href="style/pasek.css" type="text/css">
-  <title>Document</title>
+  <title>Logowanie</title>
+  <style>
+  .error
+  {
+    height: 15px;
+      color:#980000 ;
+      font-size: 13px;
+      margin-top: 0px;
+      margin-bottom: 2px;
+  }
+  </style>
 </head>
 <body>
   <div id="container">
@@ -36,6 +46,12 @@ session_start();
       <h1 class="hhh">Zaloguj się</h2>
       <input class="inp" type="text" name="Login" placeholder="login" /> </br/></br/>
       <input class="inp" type="password" name="Hasło" placeholder="hasło" />
+      <?php
+        if(isset($_SESSION['blad'])) {
+          echo $_SESSION['blad'];
+          unset($_SESSION['blad']);
+        }
+       ?>
       <br /><br />
       <input class="btn" type="submit" value="Zaloguj się"></br/>
 
