@@ -31,24 +31,26 @@ session_start();
     </div>
   </div>
     <div class="newsfeed">
-      <h2>niusy fusy</h2>
+      <h2>newsy</h2>
       <article>
-        <p>ostatnio wyszed zwiastun kaptan Marwel</br>
-          <iframe width="620" height="360" src="https://www.youtube.com/embed/0LHxvxdRnYc"></iframe>
-        </p>
-        <p>Polscy "Szybcy i wściekli"? Raczej szybcy i biedni xd</br>
-        <iframe width="620" height="360" src="https://www.youtube.com/embed/mel7Kh4k_mo"></iframe>
-        </p>
-        <p>Już niedługo ruszają zdjęcia do kolejnego "Jaya i Cichego Boba"
-         <img src="style/img/jay.jpg" alt="Jay and silent Bob" height="auto" width="620"> </p>
         <p>Znamy tytuł nowej części Avengers</br>
         <iframe width="620" height="360" src="https://www.youtube.com/embed/hA6hldpSTF8"></iframe></p>
+
+        <p>Polscy "Szybcy i wściekli"? Raczej szybcy i biedni xd</br>
+        <iframe width="620" height="360" src="https://www.youtube.com/embed/mel7Kh4k_mo"></iframe></p>
+
+        <p>Już niedługo ruszają zdjęcia do kolejnego "Jaya i Cichego Boba"
+         <img src="style/img/jay.jpg" alt="Jay and silent Bob" height="auto" width="620"> </p>
+
+         <p>Nowy zwiastun Kapitan Marwel</br>
+         <iframe width="620" height="360" src="https://www.youtube.com/embed/0LHxvxdRnYc"></iframe></p>
         <p>Kevin Hart jednak nie zostanie gospodarzem Oscarów 2019
         <img src="style/img/hrt.jpg" alt="Kevin Hart" height="auto" width="620"></p>
         <p>ZŁOTE GLOBY 2019: Bez nominacji dla "Zimnej wojny"
         <img src="style/img/glob.jpg" alt="golden globes" height="auto" width="620"></p>
          <h2>dobre filmy</h2>
-         <p class="film"><a href="movies/1.php">zombiland</a></p>
+         <p class="film"><a href="movies/3.php">Cloverfield Lane 10</a></p>
+         <p class="film"><a href="movies/1.php">Zombiland</a></p>
          <p class="film"><a href="movies/2.php">ciche mjejsce</a></p>
       </article>
     </div>

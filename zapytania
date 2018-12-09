@@ -62,12 +62,14 @@ INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
 
 
 INSERT INTO `cast` (`id`, `name`, `last_name`, `role`, `title`) VALUES
-('8', 'Emily', 'Blunt', 'Evelyn Abbott', 'Ciche miejsce'),
-('9', 'John', 'Krasinski', 'Lee Abbott', 'Ciche miejsce'),
-(NULL, 'Millicent', 'Simmonds', 'Regan Abbott', 'Ciche miejsce'),
-(NULL, 'Noah', 'Jupe', 'Marcus Abbott', 'Ciche miejsce'),
-(NULL, 'Cade', 'Woodward', 'Beau Abbott', 'Ciche miejsce'),
-(NULL, 'Leon', 'Russom', 'Mężczyzna w lesie', 'Ciche miejsce');
+(null, 'Mary Elizabeth', 'Winstead', 'Michelle', 'Cloverfield Lane 10'),
+(null, 'John', 'Goodman', 'Howard', 'Cloverfield Lane 10'),
+(NULL, 'John', 'Gallagher Jr.', 'Emmet', 'Cloverfield Lane 10'),
+(NULL, 'Douglas M.', 'Griffin', 'Kierowca', 'Cloverfield Lane 10'),
+(NULL, 'Suzanne', 'Cryer', 'Kobieta', 'Cloverfield Lane 10'),
+(NULL, 'Bradley', 'Cooper', 'Ben (głos)', 'Cloverfield Lane 10'),
+(NULL, 'Sumalee', 'Montano', 'Głos w radio (głos)', 'Cloverfield Lane 10'),
+(NULL, 'Frank', 'Mottek', 'Prezenter radiowy (głos)', 'Cloverfield Lane 10');
 
 
 INSERT INTO `cast` (`id`, `name`, `last_name`, `role`, `title`) VALUES
@@ -133,11 +135,13 @@ INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
 
 
 INSERT INTO `crew` (`id`, `name`, `last_name`, `credit`, `title`) VALUES
-(2, 'Rhett', 'Reese', 'scenariusz', 'Zombieland'),
-(3, 'Paul', 'Wernick', 'scenariusz', 'Zombieland'),
-(4, 'Michael', 'Bonvillain', 'zdjęcia', 'Zombieland'),
-(5, 'David', 'Sardy', 'muzyka', 'Zombieland'),
-(6, 'Alan', 'Baumgarten', 'montaż', 'Zombieland');
+(null, 'Dan', 'Trachtenberg', 'reżyseria', 'Cloverfield Lane 10'),
+(null, 'Matthew', 'Stuecken', 'scenariusz', 'Cloverfield Lane 10'),
+(null, 'Josh', 'Campbell', 'scenariusz', 'Cloverfield Lane 10'),
+(null, 'Damien', 'Chazelle', 'scenariusz', 'Cloverfield Lane 10'),
+(null, 'Jeff', 'Cutter', 'zdjęcia', 'Cloverfield Lane 10'),
+(null, 'Bear', 'McCreary', 'muzyka', 'Cloverfield Lane 10'),
+(null, 'Stefan', 'Grube', 'montaż', 'Cloverfield Lane 10');
 
 
 

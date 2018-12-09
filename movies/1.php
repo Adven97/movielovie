@@ -147,7 +147,7 @@ echo<<<END
 <h1 class="title">$tytul ($d)</h1>
 
 <ul>
-  <li><span class = "runtime">Czas trwania: $runtime min</span></li>
+  <li><span class = "runtime">Czas trwania: $runtime min.</span></li>
   <li><p class="credit">Reżyseria: <a class="person">$directorzy</a> </p></li>
   <li><p class="credit">Scenariusz: <a class="person">$scenary</a></p></li>
 </ul>

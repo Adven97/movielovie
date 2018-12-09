@@ -10,7 +10,7 @@ require_once '../connect.php';
       echo "Error ".$polaczenie->connect_errno;
     }
     else {
-      $mainid =2;
+      $mainid =3;
       $director = "reżyseria";
       $writer ="scenariusz";
 
@@ -93,7 +93,7 @@ require_once '../connect.php';
           $obsada="";
           for ($x = 0; $x < $i; $x++) {
            $actor_site =strtolower($actor_name[$x])."_".strtolower($actor_lname[$x]);
-           $obsada .= "<li><p><a href='../artists/$actor_site.php'>$actor_name[$x] $actor_lname[$x]</a> - $role[$x]</p></li>";
+           $obsada .= "<li><p class='pcast'><a class='pcast' href='../artists/$actor_site.php'>$actor_name[$x] $actor_lname[$x]</a> - $role[$x]</p></li>";
          }
 
 
