@@ -17,9 +17,24 @@ session_start();
   <div id="main">
   <div class="tyt">
     <a class="active" href="index.php">MovieLovie.com</a>
-    <input class="sb" type="text" placeholder="Search..">
-    <a href="register.php"><div class="log-btn">zarejstruj sie</div></a>
-    <a href="login.php"><div class="log-btn">zaloguj sie</div></a>
+    <input class="sb" type="text" placeholder="Szukaj...">
+    <?php
+    if(isset($_SESSION['zalogowany'])){
+      $supr = $_SESSION['ln'];
+      $imie= $_SESSION['name'];
+      $nazwisko = $_SESSION['last_name'];
+      echo "<div id='login_name'><a href='user.php'><img class='avatar' src="."'style/img/avatars/$supr.jpg'"." height='50' width='50'>ELO $imie $nazwisko</a>";
+      echo "<div id='how'>";
+      echo '<ul> <li><a href="logout.php">wyloguj sie</a></li></ul></div></div>';
+
+    }
+    else{
+    echo '<a href="register.php"><div class="log-btn">zarejstruj sie</div></a>';
+    echo '<a href="login.php"><div class="log-btn">zaloguj sie</div></a>';
+   }
+
+     ?>
+
     <div style="clear:both"></div>
     <div id="button-bar">
     <a href="#"><div class="top-btn">filmy</div></a>
@@ -36,8 +51,8 @@ session_start();
         <p>Znamy tytuł nowej części Avengers</br>
         <iframe width="620" height="360" src="https://www.youtube.com/embed/hA6hldpSTF8"></iframe></p>
 
-        <p>Polscy "Szybcy i wściekli"? Raczej szybcy i biedni xd</br>
-        <iframe width="620" height="360" src="https://www.youtube.com/embed/mel7Kh4k_mo"></iframe></p>
+        <p>WIDEO: Poznajcie tytuły odcinków sezonu "Stranger Things"</br>
+        <iframe width="620" height="360" src="https://www.youtube.com/embed/PH3kBCSfL-4"></iframe></p>
 
         <p>Już niedługo ruszają zdjęcia do kolejnego "Jaya i Cichego Boba"
          <img src="style/img/jay.jpg" alt="Jay and silent Bob" height="auto" width="620"> </p>
@@ -49,16 +64,28 @@ session_start();
         <p>ZŁOTE GLOBY 2019: Bez nominacji dla "Zimnej wojny"
         <img src="style/img/glob.jpg" alt="golden globes" height="auto" width="620"></p>
          <h2>dobre filmy</h2>
-         <p class="film"><a href="movies/3.php">Cloverfield Lane 10</a></p>
-         <p class="film"><a href="movies/1.php">Zombiland</a></p>
-         <p class="film"><a href="movies/2.php">ciche mjejsce</a></p>
+         <div class="filmy">
+           <p class="film"><a class="movi" href="movies/3.php">Cloverfield Lane 10</a></p>
+           <p class="film"><a class="movi" href="movies/1.php">Zombiland</a></p>
+           <p class="film"><a class="movi" href="movies/2.php">Ciche mjejsce</a></p>
+         </div>
+
+
       </article>
     </div>
     </div>
   </div>
 
-  <?php
+  <script>
+  /*
+  document.querySelector('.login_name').onmouseover = function(){
+    document.querySelector('.hower').style.display = 'block';
+  }
+  document.querySelector('.login_name').onmouseout = function(){
+    document.querySelector('.hower').style.display = 'none';
+  }*/
 
-   ?>
+  </script>
+
 </body>
 </html>
