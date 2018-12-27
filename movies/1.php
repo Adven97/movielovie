@@ -177,12 +177,14 @@ echo<<<END
 </div>
 <div class="rating-box">
 <div class="rating">
-  <input type="radio" name="star" value ="1" id="star1"><label for="star1"></label>
-  <input type="radio" name="star" value ="2" id="star2"><label for="star2"></label>
-  <input type="radio" name="star" value ="3" id="star3"><label for="star3"></label>
-  <input type="radio" name="star" value ="4" id="star4"><label for="star4"></label>
-  <input type="radio" name="star" value ="5" id="star5"><label for="star5"></label>
+<form method ="post" action="">
+  <input type="radio" name="star" class="starr" value ="1" id="star1"><label class="lbl" for="star1"></label>
+  <input type="radio" name="star" class="starr" value ="2" id="star2"><label class="lbl" for="star2"></label>
+  <input type="radio" name="star" class="starr" value ="3" id="star3"><label class="lbl" for="star3"></label>
+  <input type="radio" name="star" class="starr" value ="4" id="star4"><label class="lbl" for="star4"></label>
+  <input type="radio" name="star" class="starr" value ="5" id="star5"><label class="lbl" for="star5"></label>
   <button onclick="myFunction()">CCC</button>
+</form>
 </div>
 </div>
 <div class="obsada">
@@ -195,88 +197,80 @@ END
 <script>
 
 function myFunction(){
-  if(document.getElementById('star5').checked) {
-    document.getElementById('ilegwizd').innerHTML ="1 star";
-    <?php require_once '../connect.php';
+
+    <?php
+    require_once '../connect.php';
 
     $conn = @new mysqli($host, $db_user, $db_password, $db_name);
     $conn->set_charset("utf8");
+    $ocena=0;
 
-    // Check connection
+    $selected_radio = $_POST['star'];
+    if ($selected_radio == '5') {
+                $ocena=1;
+          }
+    else if ($selected_radio == '4') {
+                $ocena=2;
+          }
+    else if ($selected_radio == '3') {
+                $ocena=3;
+              }
+    else if ($selected_radio == '2') {
+                $ocena=4;
+              }
+    else if ($selected_radio == '1') {
+                  $ocena=5;
+              }
+
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     if(isset($_SESSION['zalogowany'])){
       $login = $_SESSION['login'];
-    //  if($ocena >-10){
-        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',1,'$login')";
-    if ($conn->query($query)) {
-        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
 
-    } else {
-        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
+      //sprawdzam czy ocenil
+      if ($r =$conn->query("SELECT * FROM movies_rated WHERE title='$tytul'")) {
+        if($r->num_rows>0){
+          while($w = $r->fetch_assoc()){
+            if($w['login'] == $login){
+              $grd = $w['grade'];
+      switch ($grd) {
+      case 1:
+          echo "document.getElementById('star1').checked = true;";
+          break;
+      case 2:
+          echo "document.getElementById('star2').checked = true;";
+          break;
+      case 3:
+          echo "document.getElementById('star3').checked = true;";
+          break;
+      case 4:
+          echo "document.getElementById('star4').checked = true;";
+          break;
+      case 5:
+          echo "document.getElementById('star5').checked = true;";
+          break;
+        }
+            }
+
+          }
+        }
+
+
+      } else {
+          echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
+      }
+      if ($rr=$conn->query("SELECT * FROM movies_rated WHERE title='$tytul' and login='$login'")) {
+        if($rr->num_rows>0){
+          $query = "UPDATE movies_rated SET grade = $ocena WHERE title='$tytul' and login='$login'";
+        }
+        else{
+        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',$ocena,'$login')";
+      }
     }
-
-//  }
-//  else{
-////    echo "document.getElementById('ilegwizd').innerHTML ='nie podales oceny!';";
-//  }
-}
-  else{
-    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
-  }
-    $conn->close();
-    ?>
-  }
-
-
-
-  if(document.getElementById('star4').checked) {
-    document.getElementById('ilegwizd').innerHTML ="2 star";
-    <?php require_once '../connect.php';
-
-    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
-    $conn->set_charset("utf8");
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    else {
+      echo "document.getElementById('ilegwizd').innerHTML ='blad';";
     }
-    if(isset($_SESSION['zalogowany'])){
-      $login = $_SESSION['login'];
-    //  if($ocena >-10){
-        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',2,'$login')";
-    if ($conn->query($query)) {
-        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
-
-    } else {
-        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
-    }
-
-}
-  else{
-    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
-  }
-    $conn->close();
-    ?>
-  }
-
-
-  if(document.getElementById('star3').checked) {
-    document.getElementById('ilegwizd').innerHTML ="3 star";
-    <?php require_once '../connect.php';
-
-    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
-    $conn->set_charset("utf8");
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    if(isset($_SESSION['zalogowany'])){
-      $login = $_SESSION['login'];
-    //  if($ocena >-10){
-        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',3,'$login')";
     if ($conn->query($query)) {
         echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
 
@@ -288,77 +282,12 @@ function myFunction(){
   else{
     echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
   }
+
+
     $conn->close();
     ?>
-  }
-
-
-  if(document.getElementById('star2').checked) {
-    document.getElementById('ilegwizd').innerHTML ="4 star";
-    <?php require_once '../connect.php';
-
-    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
-    $conn->set_charset("utf8");
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    if(isset($_SESSION['zalogowany'])){
-      $login = $_SESSION['login'];
-    //  if($ocena >-10){
-        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',4,'$login')";
-    if ($conn->query($query)) {
-        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
-
-    } else {
-        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
-    }
 
 }
-  else{
-    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
-  }
-    $conn->close();
-    ?>
-  }
-
-
-  if(document.getElementById('star1').checked) {
-    document.getElementById('ilegwizd').innerHTML ="5 stars";
-    <?php require_once '../connect.php';
-
-    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
-    $conn->set_charset("utf8");
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    if(isset($_SESSION['zalogowany'])){
-      $login = $_SESSION['login'];
-    //  if($ocena >-10){
-        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',5,'$login')";
-    if ($conn->query($query)) {
-        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
-
-    } else {
-        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
-    }
-
-}
-  else{
-    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
-  }
-    $conn->close();
-    ?>
-  }
-
-
-}
-
-
-
 
 
 </script>

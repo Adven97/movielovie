@@ -119,7 +119,7 @@ p.artic{
 }
 
 .rating input{
-  /* display: none; */
+   display: none;
 }
 
 .rating label{
@@ -157,4 +157,8 @@ p.artic{
 .rating input:checked ~ label:after
 {
   opacity: 1;
+}
+
+.starr, .lbl {
+    float:left;
 }
