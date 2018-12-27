@@ -10,7 +10,7 @@ session_start();
   <link rel="stylesheet" href="style/pasek.css" type="text/css">
   <link rel="stylesheet" href="style/style.css" type="text/css">
 
-  <title>Document</title>
+  <title>MovieLovie</title>
 </head>
 <body>
   <div id="container">
@@ -32,7 +32,6 @@ session_start();
     echo '<a href="register.php"><div class="log-btn">zarejstruj sie</div></a>';
     echo '<a href="login.php"><div class="log-btn">zaloguj sie</div></a>';
    }
-
      ?>
 
     <div style="clear:both"></div>

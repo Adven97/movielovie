@@ -22,6 +22,7 @@ require_once '../connect.php';
           $tytul=$wiersz['movie_title'];
           $runtime = $wiersz['runtime'];
           $data= $wiersz['release_date'];
+          $opis = $wiersz['synopsis'];
           $date = DateTime::createFromFormat("Y-m-d", $data);
           $d = $date->format("Y");
 
@@ -112,19 +113,37 @@ require_once '../connect.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
   <link rel="stylesheet" href="../style/pasek.css" type="text/css">
   <link rel="stylesheet" href="../style/style.css" type="text/css">
   <link rel="stylesheet" href="../style/movie.css" type="text/css">
-  <title>Document</title>
+  <?php
+  echo "<title>$tytul</title>"
+   ?>
 </head>
 <body>
   <div id="container">
   <div id="main">
   <div class="tyt">
     <a class="active" href="../index.php">MovieLovie.com</a>
-    <input class="sb" type="text" placeholder="Search..">
-    <a href="../register.php"><div class="log-btn">zarejstruj sie</div></a>
-    <a href="../login.php"><div class="log-btn">zaloguj sie</div></a>
+    <input class="sb" type="text" placeholder="Szukaj...">
+    <?php
+    if(isset($_SESSION['zalogowany'])){
+      $supr = $_SESSION['ln'];
+      $imie= $_SESSION['name'];
+      $nazwisko = $_SESSION['last_name'];
+      $login = $_SESSION['login'];
+      echo "<div id='login_name'><a href='user.php'><img class='avatar' src="."'../style/img/avatars/$supr.jpg'"." height='50' width='50'>ELO $imie $nazwisko</a>";
+      echo "<div id='how'>";
+      echo '<ul> <li><a href="../logout.php">wyloguj sie</a></li></ul></div></div>';
+
+    }
+    else{
+    echo '<a href="../register.php"><div class="log-btn">zarejstruj sie</div></a>';
+    echo '<a href="../login.php"><div class="log-btn">zaloguj sie</div></a>';
+   }
+     ?>
     <div style="clear:both"></div>
     <div id="button-bar">
     <a href="#"><div class="top-btn">filmy</div></a>
@@ -145,6 +164,7 @@ require_once '../connect.php';
 echo<<<END
 <div class="info-box">
 <h1 class="title">$tytul ($d)</h1>
+<p id ="ilegwizd">Nie zaznaczono</p>
 
 <ul>
   <li><span class = "runtime">Czas trwania: $runtime min.</span></li>
@@ -152,6 +172,18 @@ echo<<<END
   <li><p class="credit">Scenariusz: <a class="person">$scenary</a></p></li>
 </ul>
 
+<article><p class="artic"><i>$opis</i></p></article>
+
+</div>
+<div class="rating-box">
+<div class="rating">
+  <input type="radio" name="star" value ="1" id="star1"><label for="star1"></label>
+  <input type="radio" name="star" value ="2" id="star2"><label for="star2"></label>
+  <input type="radio" name="star" value ="3" id="star3"><label for="star3"></label>
+  <input type="radio" name="star" value ="4" id="star4"><label for="star4"></label>
+  <input type="radio" name="star" value ="5" id="star5"><label for="star5"></label>
+  <button onclick="myFunction()">CCC</button>
+</div>
 </div>
 <div class="obsada">
   <h1 class="title">Obsada</h1>
@@ -159,9 +191,176 @@ echo<<<END
 </div>
 END
 ?>
-</div>
 
-</div>
+<script>
 
+function myFunction(){
+  if(document.getElementById('star5').checked) {
+    document.getElementById('ilegwizd').innerHTML ="1 star";
+    <?php require_once '../connect.php';
+
+    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
+    $conn->set_charset("utf8");
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    if(isset($_SESSION['zalogowany'])){
+      $login = $_SESSION['login'];
+    //  if($ocena >-10){
+        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',1,'$login')";
+    if ($conn->query($query)) {
+        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
+
+    } else {
+        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
+    }
+
+//  }
+//  else{
+////    echo "document.getElementById('ilegwizd').innerHTML ='nie podales oceny!';";
+//  }
+}
+  else{
+    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
+  }
+    $conn->close();
+    ?>
+  }
+
+
+
+  if(document.getElementById('star4').checked) {
+    document.getElementById('ilegwizd').innerHTML ="2 star";
+    <?php require_once '../connect.php';
+
+    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
+    $conn->set_charset("utf8");
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    if(isset($_SESSION['zalogowany'])){
+      $login = $_SESSION['login'];
+    //  if($ocena >-10){
+        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',2,'$login')";
+    if ($conn->query($query)) {
+        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
+
+    } else {
+        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
+    }
+
+}
+  else{
+    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
+  }
+    $conn->close();
+    ?>
+  }
+
+
+  if(document.getElementById('star3').checked) {
+    document.getElementById('ilegwizd').innerHTML ="3 star";
+    <?php require_once '../connect.php';
+
+    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
+    $conn->set_charset("utf8");
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    if(isset($_SESSION['zalogowany'])){
+      $login = $_SESSION['login'];
+    //  if($ocena >-10){
+        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',3,'$login')";
+    if ($conn->query($query)) {
+        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
+
+    } else {
+        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
+    }
+
+}
+  else{
+    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
+  }
+    $conn->close();
+    ?>
+  }
+
+
+  if(document.getElementById('star2').checked) {
+    document.getElementById('ilegwizd').innerHTML ="4 star";
+    <?php require_once '../connect.php';
+
+    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
+    $conn->set_charset("utf8");
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    if(isset($_SESSION['zalogowany'])){
+      $login = $_SESSION['login'];
+    //  if($ocena >-10){
+        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',4,'$login')";
+    if ($conn->query($query)) {
+        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
+
+    } else {
+        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
+    }
+
+}
+  else{
+    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
+  }
+    $conn->close();
+    ?>
+  }
+
+
+  if(document.getElementById('star1').checked) {
+    document.getElementById('ilegwizd').innerHTML ="5 stars";
+    <?php require_once '../connect.php';
+
+    $conn = @new mysqli($host, $db_user, $db_password, $db_name);
+    $conn->set_charset("utf8");
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    if(isset($_SESSION['zalogowany'])){
+      $login = $_SESSION['login'];
+    //  if($ocena >-10){
+        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',5,'$login')";
+    if ($conn->query($query)) {
+        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
+
+    } else {
+        echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
+    }
+
+}
+  else{
+    echo "document.getElementById('ilegwizd').innerHTML ='zaloguj sie deklu';";
+  }
+    $conn->close();
+    ?>
+  }
+
+
+}
+
+
+
+
+
+</script>
 </body>
 </html>

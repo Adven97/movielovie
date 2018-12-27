@@ -21,6 +21,7 @@ require_once '../connect.php';
 
           $tytul=$wiersz['movie_title'];
           $runtime = $wiersz['runtime'];
+          $opis = $wiersz['synopsis'];
           $data= $wiersz['release_date'];
           $date = DateTime::createFromFormat("Y-m-d", $data);
           $d = $date->format("Y");
@@ -122,9 +123,22 @@ require_once '../connect.php';
   <div id="main">
   <div class="tyt">
     <a class="active" href="../index.php">MovieLovie.com</a>
-    <input class="sb" type="text" placeholder="Search..">
-    <a href="../register.php"><div class="log-btn">zarejstruj sie</div></a>
-    <a href="../login.php"><div class="log-btn">zaloguj sie</div></a>
+    <input class="sb" type="text" placeholder="Szukaj...">
+    <?php
+    if(isset($_SESSION['zalogowany'])){
+      $supr = $_SESSION['ln'];
+      $imie= $_SESSION['name'];
+      $nazwisko = $_SESSION['last_name'];
+      echo "<div id='login_name'><a href='user.php'><img class='avatar' src="."'../style/img/avatars/$supr.jpg'"." height='50' width='50'>ELO $imie $nazwisko</a>";
+      echo "<div id='how'>";
+      echo '<ul> <li><a href="../logout.php">wyloguj sie</a></li></ul></div></div>';
+
+    }
+    else{
+    echo '<a href="../register.php"><div class="log-btn">zarejstruj sie</div></a>';
+    echo '<a href="../login.php"><div class="log-btn">zaloguj sie</div></a>';
+   }
+     ?>
     <div style="clear:both"></div>
     <div id="button-bar">
     <a href="#"><div class="top-btn">filmy</div></a>
@@ -151,7 +165,7 @@ echo<<<END
   <li><p class="credit">Reżyseria: <a class="person">$directorzy</a> </p></li>
   <li><p class="credit">Scenariusz: <a class="person">$scenary</a></p></li>
 </ul>
-
+<article><p class="artic"><i>$opis</i></p></article>
 </div>
 <div class="obsada">
   <h1 class="title">Obsada</h1>

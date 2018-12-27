@@ -237,7 +237,7 @@ if (isset($_POST['email']))
 
 <script>
 function lettersOnly(inp){
-  let regex = /[^a-z]/gi;
+  let regex = /[^qwertyuiopasdfghjklzxcvbnmąężłóź]/gi;
   inp.value = inp.value.replace(regex,"");
 }
 

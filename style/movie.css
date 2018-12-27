@@ -89,3 +89,72 @@ a.pcast:hover{
   text-decoration: underline;
   font-weight: bold;
 }
+
+p.artic{
+  font-size: 17px;
+  margin-left: 40px;
+  width:450px;
+  height: 220px;
+  margin-bottom: 60px;
+}
+
+.rating-box{
+  background-color: #303030;
+  margin-left: 890px;
+  margin-top: 25px;
+  height: 310px;
+  width:340px;
+  border-radius: 10px;
+  /* transform: translate(-50%,-50%); */
+
+}
+.rating{
+  width: 300px;
+  margin-left: 120px;
+  margin-top:180px;
+  /* background-color: cyan; */
+  display: flex;
+  position: absolute;
+  transform: translate(-50%,-50%) rotateY(180deg);
+}
+
+.rating input{
+  /* display: none; */
+}
+
+.rating label{
+  cursor: pointer;
+   width: 40px;
+   display: block;
+   /* background-color: #FFDF00; */
+}
+
+.rating label:before{
+  content: '\f005';
+  font-family: fontAwesome;
+  position: relative;
+  display: block;
+  font-size: 30px;
+  color: #101010;
+
+}
+
+.rating label:after{
+  content: '\f005';
+  font-family: fontAwesome;
+  position: absolute;
+  display: block;
+  font-size: 30px;
+  color: #ffdf00;
+  top:0;
+  opacity: 0;
+  transition: .5s
+  text-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after
+{
+  opacity: 1;
+}
