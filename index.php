@@ -36,10 +36,10 @@ session_start();
 
     <div style="clear:both"></div>
     <div id="button-bar">
-    <a href="#"><div class="top-btn">filmy</div></a>
+    <a href="movies.php"><div class="top-btn">filmy</div></a>
     <a href="#"><div class="top-btn">seriale</div></a>
     <a href="#"><div class="top-btn">ludzie kina</div></a>
-    <a href="#"><div class="top-btn">newsy</div></a>
+    <a href="articles.php"><div class="top-btn">newsy</div></a>
     <a href="#"><div class="top-btn">premiery</div></a>
     <a href="#"><div class="top-btn">zwiastuny</div></a>
     </div>
@@ -47,21 +47,31 @@ session_start();
     <div class="newsfeed">
       <h2>newsy</h2>
       <article>
-        <p>Znamy tytuł nowej części Avengers</br>
-        <iframe width="620" height="360" src="https://www.youtube.com/embed/hA6hldpSTF8"></iframe></p>
-
-        <p>WIDEO: Poznajcie tytuły odcinków sezonu "Stranger Things"</br>
-        <iframe width="620" height="360" src="https://www.youtube.com/embed/PH3kBCSfL-4"></iframe></p>
-
-        <p>Już niedługo ruszają zdjęcia do kolejnego "Jaya i Cichego Boba"
+        <p>Jay i Cichy Bob w drodze na ekran
          <img src="style/img/jay.jpg" alt="Jay and silent Bob" height="auto" width="620"> </p>
 
-         <p>Nowy zwiastun Kapitan Marwel</br>
-         <iframe width="620" height="360" src="https://www.youtube.com/embed/0LHxvxdRnYc"></iframe></p>
-        <p>Kevin Hart jednak nie zostanie gospodarzem Oscarów 2019
-        <img src="style/img/hrt.jpg" alt="Kevin Hart" height="auto" width="620"></p>
-        <p>ZŁOTE GLOBY 2019: Bez nominacji dla "Zimnej wojny"
-        <img src="style/img/glob.jpg" alt="golden globes" height="auto" width="620"></p>
+        <p>Gary Oldman chce znów zagrać Churchilla</br>
+        <img src="style/img/oldman.jpg" alt="Gary Oldman" height="auto" width="620"> </p>
+
+        <p>"Aquaman" największym hitem w historii DCEU poza granicami USA
+        <img src="style/img/kasa.jpg" alt="kasa" height="auto" width="620"></p>
+
+        <p>Kevin Spacey usłyszał zarzuty. W odpowiedzi opublikował wideo</br>
+        <img src="style/img/ks.jpg" alt="kevin spacey" height="auto" width="620"></p>
+
+        <h2>zwiastuny</h2>
+
+         <p>Czarne lustro: Bandersnatch</br>
+         <iframe width="620" height="360" src="https://www.youtube.com/embed/hVWSqUHQwF4"></iframe></p>
+
+         <p>Godzilla II: Król potworów</br>
+         <iframe width="620" height="360" src="https://www.youtube.com/embed/KDnKuFtdc7A"></iframe></p>
+         <p>Men in Black: International</br>
+         <iframe width="620" height="360" src="https://www.youtube.com/embed/qvXzEhXujxA"></iframe></p>
+         <p>Us</br>
+         <iframe width="620" height="360" src="https://www.youtube.com/embed/hNCmb-4oXJA"></iframe></p>
+
+
          <h2>dobre filmy</h2>
          <div class="filmy">
            <p class="film"><a class="movi" href="movies/3.php">Cloverfield Lane 10</a></p>

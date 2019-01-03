@@ -21,7 +21,7 @@ body{
   width: 88%;
   margin-top: 0px;
   padding-top: 0px;
-  min-height: 2900px;
+  min-height: 3900px;
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
@@ -35,8 +35,8 @@ h2{
 }
 
 .newsfeed{
-  width:600px;
-  height:350px;
+  width:650px;
+  /* height:350px; */
   margin-left: auto;
   margin-right: auto;
   font-size: 23px;
@@ -56,4 +56,14 @@ a.movi{
 a.movi:hover{
   text-decoration: underline;
   color:#980000;
+}
+
+a.artic, a.artic:visited, a.artic:hover, a.artic:active{
+   text-decoration: none;
+   color: #100000
+}
+
+.tyt-newsa{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 44px;
 }
