@@ -13,6 +13,7 @@ require_once '../connect.php';
       $mainid =1;
       $director = "reżyseria";
       $writer ="scenariusz";
+      $ocenaa ='Zaloguj sie by ocenić';
 
       $sql="SELECT * FROM movies WHERE id='$mainid'";
       if($rezultat =@$polaczenie->query($sql) ){
@@ -104,10 +105,30 @@ require_once '../connect.php';
 
 
 
+        if(isset($_SESSION['zalogowany'])){
+          $login = $_SESSION['login'];
+          $ocenaa ="Nie oceniono tego filmu";
+
+        if($rezultat5 =@$polaczenie->query("SELECT * FROM movies_rated where title ='$tytul' And login ='$login' ") ){
+          if($rezultat5->num_rows>0){
+
+
+          $wiersz5 = $rezultat5->fetch_assoc();
+          $ocenka = $wiersz5['grade'];
+          $ocenaa = "Film oceniono na $ocenka / 5";
+
+          }else{
+            $ocenaa ="Nie oceniono tego filmu";
+          }
+          $rezultat5->free_result();
+        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+      }
+
+
+
 
         $polaczenie->close();
         }
-
 
 
 ?>
@@ -138,7 +159,7 @@ require_once '../connect.php';
       $imie= $_SESSION['name'];
       $nazwisko = $_SESSION['last_name'];
       $login = $_SESSION['login'];
-      echo "<div id='login_name'><a href='user.php'><img class='avatar' src="."'../style/img/avatars/$supr.jpg'"." height='50' width='50'>ELO $imie $nazwisko</a>";
+      echo "<div id='login_name'><a href='../user.php'><img class='avatar' src="."'../style/img/avatars/$supr.jpg'"." height='50' width='50'>ELO $imie $nazwisko</a>";
       echo "<div id='how'>";
       echo '<ul> <li><a href="../logout.php">wyloguj sie</a></li></ul></div></div>';
 
@@ -168,7 +189,7 @@ require_once '../connect.php';
 echo<<<END
 <div class="info-box">
 <h1 class="title">$tytul ($d)</h1>
-<p id ="ilegwizd">Nie zaznaczono</p>
+
 
 <ul>
   <li><span class = "runtime">Czas trwania: $runtime min.</span></li>
@@ -180,6 +201,7 @@ echo<<<END
 
 </div>
 <div class="rating-box">
+<div id="ileg"><p id ="ilegwizd">$ocenaa</p></div>
 <div class="rating">
 <form method ="post" action="">
   <input type="radio" name="star" class="starr" value ="1" id="star1"><label id ="xddd1" class="lbl" for="star1"></label>
@@ -187,8 +209,8 @@ echo<<<END
   <input type="radio" name="star" class="starr" value ="3" id="star3"><label class="lbl" for="star3"></label>
   <input type="radio" name="star" class="starr" value ="4" id="star4"><label class="lbl" for="star4"></label>
   <input type="radio" name="star" class="starr" value ="5" id="star5"><label class="lbl" for="star5"></label>
-
-  <button onclick="myFunction()">CCC</button>
+  <div style="clear:both"></div>
+  <button id ="addstar" onclick="myFunction()">Oceń Film</button>
   </form>
 
 </div>
@@ -210,6 +232,7 @@ function myFunction(){
     $conn = @new mysqli($host, $db_user, $db_password, $db_name);
     $conn->set_charset("utf8");
     $ocena=0;
+    $execued=false;
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -242,6 +265,21 @@ function myFunction(){
         }
         else{
         $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',$ocena,'$login')";
+
+        if($execued === false){
+        if($rezultat56 =@$conn->query("SELECT * FROM users where login ='$login'") ){
+          if($rezultat56->num_rows>0){
+            $wiersz56 = $rezultat56->fetch_assoc();
+            $liczba_ocen = $wiersz56['movies_watched'];
+            $ocenyyy = $liczba_ocen+1;
+            $czas = $wiersz56['time_spent'];
+            $conn->query("UPDATE users SET movies_watched = $ocenyyy, time_spent=$czas+$runtime where login ='$login'");
+
+            $execued=true;
+          }
+          $rezultat56->free_result();
+      }
+    }
       }
     }
     else {
@@ -249,9 +287,13 @@ function myFunction(){
     }
     if($ocena >0){
     if ($conn->query($query)) {
-        echo "document.getElementById('ilegwizd').innerHTML ='JES SZTYWNIUTKO';";
 
-    } else {
+        $ocenaa = "Film oceniono na $ocena / 5";
+        echo "document.getElementById('ilegwizd').innerHTML ='Film oceniono na $ocena / 5';";
+
+  }
+
+    else {
         echo "document.getElementById('ilegwizd').innerHTML ='error z updatem';";
     }
   }
