@@ -11,9 +11,9 @@ require_once '../connect.php';
     }
     else {
       $mainid =1;
-      $artist_name ="Emma";
-      $artist_lname ="Stone";
-      $img_name="emma_stone";
+      $artist_name ="John";
+      $artist_lname ="Gallagher Jr.";
+      $img_name="john_gallagher_jr";
       $castheader ="";
       $crewheader ="";
 

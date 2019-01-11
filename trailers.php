@@ -11,24 +11,23 @@ require_once 'connect.php';
     }
     else {
 
-      $query4="SELECT * FROM articles";
-      if($rezultat4 =@$polaczenie->query($query4) ){
+      if($rezultat4 =@$polaczenie->query("SELECT * FROM trailers")){
         if($rezultat4->num_rows>0){
 
         $i=0;
         while($wiersz = $rezultat4->fetch_assoc()){
 
           $idd[$i] = $wiersz['id'];
-          $tytul[$i] = $wiersz['article_title'];
-          $zdj[$i]=$wiersz['image'];
+          $tytul[$i] = $wiersz['title'];
+          $url[$i]=$wiersz['url'];
 
           $i=$i+1;
         }
-        $articles="";
+        $trailers="";
         for ($x = $i-1; $x >=0; $x--) {
-         $link ="article+".$idd[$x];
-         $articles .= "<a class='artik' href='articles/$link.php'><p>$tytul[$x]<img src='style/img/$zdj[$x]' alt='' height='auto' width='620'> </p></a>";
+         $trailers .= "<p>$tytul[$x]</br><iframe width='620' height='360' src='https://www.youtube.com/embed/$url[$x]'></iframe></p>";
        }
+
 
         }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
         $rezultat4->free_result();
@@ -58,19 +57,11 @@ require_once 'connect.php';
     font-size: 16px;
     margin-left:200px;
     cursor: pointer;
-}
-.artik, .artik:visited, .artik:active{
-   text-decoration: none;
-   color: #101010;
-}
-.artik:hover{
-  transform: scale(1.08);
-  text-decoration: underline;
-  color: #000000;
-}
+    }
+
   </style>
 
-  <title>MovieLovie - Newsy</title>
+  <title>MovieLovie</title>
 </head>
 <body>
   <div id="container">
@@ -105,10 +96,10 @@ require_once 'connect.php';
     </div>
   </div>
     <div class="newsfeed">
-      <h2>newsy</h2>
-      <a class="artic" href="articles/addNew.php"><button class ="btn">Dodaj nowy artykuł</button></a>
+      <h2>zwiastuny</h2>
+      <a class="artic" href="addNewTrailer.php"><button class ="btn">Dodaj zwiastun</button></a>
       <article>
-        <?php echo $articles ?>
+        <?php echo $trailers ?>
 
       </article>
     </div>

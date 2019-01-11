@@ -14,6 +14,9 @@ require_once '../connect.php';
       $director = "reżyseria";
       $writer ="scenariusz";
       $ocenaa ='Zaloguj sie by ocenić';
+      $prycisk="";
+      $reviews="";
+      $recheder='';
 
       $sql="SELECT * FROM movies WHERE id='$mainid'";
       if($rezultat =@$polaczenie->query($sql) ){
@@ -46,7 +49,9 @@ require_once '../connect.php';
             }
             $directorzy="";
             for ($x = 0; $x < $i; $x++) {
-             $directorzy .= " $director_name[$x] $director_lname[$x] ,";
+             $actor_site =strtolower($director_name[$x])."_".strtolower($director_lname[$x]);
+             $directorzy .= "<a class='pcast2' href='../artists/$actor_site.php'>$director_name[$x] $director_lname[$x]</a>";
+             $directorzy .= ", ";
            }
            $directorzy =substr($directorzy, 0, -2);
 
@@ -69,13 +74,56 @@ require_once '../connect.php';
           }
           $scenary="";
           for ($x = 0; $x < $i; $x++) {
-           $scenary .= " $writer_name[$x] $writer_lname[$x] ,";
+           $actor_site =strtolower($writer_name[$x])."_".strtolower($writer_lname[$x]);
+           $scenary .= "<a class='pcast2' href='../artists/$actor_site.php'>$writer_name[$x] $writer_lname[$x]</a> ";
+           $scenary .= ", ";
          }
          $scenary =substr($scenary, 0, -2);
 
 
           }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
           $rezultat3->free_result();
+        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+        if($rezultatx1 =@$polaczenie->query("SELECT * FROM crew WHERE title='$tytul' and credit='zdjęcia' ") ){
+          if($rezultatx1->num_rows>0){
+
+          $wierszx1 = $rezultatx1->fetch_assoc();
+            $op_name = $wierszx1['name'];
+            $op_lname = $wierszx1['last_name'];
+            $actor_site =strtolower($op_name)."_".strtolower($op_lname);
+           $zdje= "<a class='pcast2' href='../artists/$actor_site.php'>$op_name $op_lname</a> ";
+
+          }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+          $rezultatx1->free_result();
+        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+
+        if($rezultatx2 =@$polaczenie->query("SELECT * FROM crew WHERE title='$tytul' and credit='muzyka' ") ){
+          if($rezultatx2->num_rows>0){
+
+          $wierszx2 = $rezultatx2->fetch_assoc();
+            $muz_name = $wierszx2['name'];
+            $muz_lname = $wierszx2['last_name'];
+            $actor_site =strtolower($muz_name)."_".strtolower($muz_lname);
+           $muzz= "<a class='pcast2' href='../artists/$actor_site.php'>$muz_name $muz_lname</a> ";
+
+          }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+          $rezultatx2->free_result();
+        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+
+        if($rezultatx3 =@$polaczenie->query("SELECT * FROM crew WHERE title='$tytul' and credit='montaż' ") ){
+          if($rezultatx3->num_rows>0){
+
+          $wierszx3 = $rezultatx3->fetch_assoc();
+            $mont_name = $wierszx3['name'];
+            $mont_lname = $wierszx3['last_name'];
+            $actor_site =strtolower($mont_name)."_".strtolower($mont_lname);
+           $mont= "<a class='pcast2' href='../artists/$actor_site.php'>$mont_name $mont_lname</a> ";
+
+          }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+          $rezultatx3->free_result();
         }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
 
 
@@ -116,16 +164,57 @@ require_once '../connect.php';
           $wiersz5 = $rezultat5->fetch_assoc();
           $ocenka = $wiersz5['grade'];
           $ocenaa = "Film oceniono na $ocenka / 5";
-
+          $prycisk= "<div id ='dodajrec'><a class='artic' href='../reviews/addReview.php'><button class ='btn'>Dodaj recenzję</button></a></div>";
+          $_SESSION['tytdorec'] = $tytul;
+          $_SESSION['ocenadorec'] = $ocenka;
           }else{
             $ocenaa ="Nie oceniono tego filmu";
           }
           $rezultat5->free_result();
-        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+        }else{}
       }
 
+      if($rezultat6 =@$polaczenie->query("SELECT AVG(grade) as avgrade FROM movies_rated WHERE title='$tytul' ") ){
+        if($rezultat6->num_rows>0){
+
+        $wiersz6 = $rezultat6->fetch_assoc();
+        $srednia = $wiersz6['avgrade'];
+        //$ocenaa = "Film oceniono na $ocenka / 5";
 
 
+        }else{
+        //  $ocenaa ="Nie oceniono tego filmu";
+        }
+        $rezultat6->free_result();
+      }else{}
+
+        if($rezultat44 =@$polaczenie->query("SELECT * FROM reviews where title='$tytul'") ){
+          if($rezultat44->num_rows>0){
+          $recheder='<h2>Recenzje użytkownika</h2>';
+          $i=0;
+          while($wiersz44 = $rezultat44->fetch_assoc()){
+
+            $iddd[$i] = $wiersz44['id'];
+            $tytxdxd[$i] = $wiersz44['title'];
+            $tytulrec[$i] = $wiersz44['review_title'];
+
+            $imierec[$i] = $wiersz44['author_name'];
+            $nazwiskorec[$i] = $wiersz44['author_last_name'];
+
+            $zdj[$i]=$wiersz44['image'];
+            $calytyt[$i] = $tytulrec[$i].' - Recenzja filmu '.$tytxdxd[$i];
+
+            $i=$i+1;
+          }
+
+          for ($x = $i-1; $x >=0; $x--) {
+           $link ="reviews/review+".$iddd[$x];
+           $reviews .= "<a class='artik' href='reviews/$link.php'><p>$calytyt[$x]<br><i> Recenzja użytkownika $imierec[$x] $nazwiskorec[$x]</i></p></a>";
+         }
+
+          }else{}
+          $rezultat44->free_result();
+        }else{}
 
         $polaczenie->close();
         }
@@ -143,6 +232,40 @@ require_once '../connect.php';
   <link rel="stylesheet" href="../style/pasek.css" type="text/css">
   <link rel="stylesheet" href="../style/style.css" type="text/css">
   <link rel="stylesheet" href="../style/movie.css" type="text/css">
+
+  <style>
+  .artik, .artik:visited, .artik:active{
+     text-decoration: none;
+     color: #100000;
+  }
+   a.artik:hover{
+
+    text-decoration: underline;
+    color: #000000;
+  }
+
+  .btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+     display: inline-block;
+    /* display: none; */
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left:135px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.btn:hover{
+  transform: scale(1.08);
+  transition: .3s;
+  background-color: #3bAe40;
+}
+  </style>
+
   <?php
   echo "<title>$tytul</title>"
    ?>
@@ -193,8 +316,11 @@ echo<<<END
 
 <ul>
   <li><span class = "runtime">Czas trwania: $runtime min.</span></li>
-  <li><p class="credit">Reżyseria: <a class="person">$directorzy</a> </p></li>
-  <li><p class="credit">Scenariusz: <a class="person">$scenary</a></p></li>
+  <li><div class ='kred'><p class="credit">Reżyseria: <a class="person">$directorzy</a> </p></div></li>
+  <li><div class ='kred'><p class="credit">Scenariusz: <a class="person">$scenary</a></p></div></li>
+  <li><div class ='kred'><p class="credit">Zdjęcia: <a class="person">$zdje</a></p></div></li>
+  <li><div class ='kred'><p class="credit">Muzyka: <a class="person">$muzz</a></p></div></li>
+  <li><div class ='kred'><p class="credit">Montaż: <a class="person">$mont</a></p></div></li>
 </ul>
 
 <article><p class="artic"><i>$opis</i></p></article>
@@ -209,16 +335,27 @@ echo<<<END
   <input type="radio" name="star" class="starr" value ="3" id="star3"><label class="lbl" for="star3"></label>
   <input type="radio" name="star" class="starr" value ="4" id="star4"><label class="lbl" for="star4"></label>
   <input type="radio" name="star" class="starr" value ="5" id="star5"><label class="lbl" for="star5"></label>
+
   <div style="clear:both"></div>
-  <button id ="addstar" onclick="myFunction()">Oceń Film</button>
+  <button id ="addstar" onclick="myFunction(); insertKurwa();">Oceń Film</button>
   </form>
 
 </div>
+<div id="ileg"><p id ="ilegwizd2">Średnia ocena: $srednia</p></div>
+
 </div>
+$prycisk
 <div class="obsada">
   <h1 class="title">Obsada</h1>
   <ul>$obsada</ul>
+  <div class="newsfeed_rev">
+    $recheder
+    <article>
+       $reviews
+    </article>
+  </div>
 </div>
+
 END
 ?>
 
@@ -264,24 +401,30 @@ function myFunction(){
           $query = "UPDATE movies_rated SET grade = $ocena WHERE title='$tytul' and login='$login'";
         }
         else{
-        $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',$ocena,'$login')";
 
-        if($execued === false){
-        if($rezultat56 =@$conn->query("SELECT * FROM users where login ='$login'") ){
-          if($rezultat56->num_rows>0){
-            $wiersz56 = $rezultat56->fetch_assoc();
-            $liczba_ocen = $wiersz56['movies_watched'];
-            $ocenyyy = $liczba_ocen+1;
-            $czas = $wiersz56['time_spent'];
-            $conn->query("UPDATE users SET movies_watched = $ocenyyy, time_spent=$czas+$runtime where login ='$login'");
-            
-            $execued=true;
-          }
-          $rezultat56->free_result();
-      }
-    }
 
+        //if($execued === false){
+      //   if($rezultat56 =@$conn->query("SELECT * FROM users where login ='$login'") ){
+      //     if($rezultat56->num_rows>0){
+      //       $wiersz56 = $rezultat56->fetch_assoc();
+      //       $liczba_ocen = $wiersz56['movies_watched'];
+      //       $ocenyyy = $liczba_ocen+1;
+      //       $czas = $wiersz56['time_spent'];
+      //       if($conn->query("UPDATE users SET movies_watched = movies_watched+1, time_spent=time_spent+$runtime/2 where login ='$login'")){
+      //         echo "document.getElementById('ilegwizd').innerHTML ='Film oceniono dobazzy';";
+      //         //$execued=true;
+      //       }
+      //       else{
+      //         echo "document.getElementById('ilegwizd').innerHTML ='chuj nieocenino';";
+      //       }
+      //
+      //
+      //     }
+      //     $rezultat56->free_result();
+      // }
+      $query="INSERT into movies_rated(title,grade,login) VALUES ('$tytul',$ocena,'$login')";
       }
+    //  }
     }
     else {
       echo "document.getElementById('ilegwizd').innerHTML ='blad';";
@@ -310,6 +453,69 @@ function myFunction(){
     $conn->close();
     ?>
 
+}
+
+function insertKurwa(){
+
+  <?php
+  require_once '../connect.php';
+
+  $conn = @new mysqli($host, $db_user, $db_password, $db_name);
+  $conn->set_charset("utf8");
+  $ocena=0;
+  $execued=false;
+
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
+  if(isset($_SESSION['zalogowany'])){
+    $login = $_SESSION['login'];
+
+
+        $selected_radio = $_POST['star'];
+        if ($selected_radio == '5') {
+                    $ocena=1;
+              }
+        else if ($selected_radio == '4') {
+                    $ocena=2;
+              }
+        else if ($selected_radio == '3') {
+                    $ocena=3;
+                  }
+        else if ($selected_radio == '2') {
+                    $ocena=4;
+                  }
+        else if ($selected_radio == '1') {
+                      $ocena=5;
+                  }
+
+
+    if ($rr=$conn->query("SELECT * FROM movies_rated WHERE title='$tytul' and login='$login'")) {
+      if($rr->num_rows==0){
+
+          if($conn->query("UPDATE users SET movies_watched = movies_watched+1, time_spent=time_spent+$runtime where login ='$login'")){
+            echo "document.getElementById('ilegwizd').innerHTML ='Film oceniono dobazzy';";
+            //$execued=true;
+          }
+          else{
+            echo "document.getElementById('ilegwizd').innerHTML ='chuj nieocenino';";
+          }
+
+
+
+        $rezultat56->free_result();
+
+  }
+
+  }
+  else {
+    echo "document.getElementById('ilegwizd').innerHTML ='blad';";
+  }
+
+
+  $conn->close();
+}
+   ?>
 }
 
 </script>

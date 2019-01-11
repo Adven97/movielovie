@@ -59,6 +59,9 @@ a.person{
   font-family: 'Poppins', sans-serif;
   color: #000000;
 }
+.kred{
+  height: 13px;
+}
 span.runtime{
   font-size: 15px;
   font-family: 'Poppins', sans-serif;
@@ -90,6 +93,18 @@ a.pcast:hover{
   font-weight: bold;
 }
 
+a.pcast2{
+  color: #101010;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+a.pcast2:hover{
+  color: #FF0000;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 p.artic{
   font-size: 17px;
   margin-left: 40px;
@@ -111,7 +126,7 @@ p.artic{
 .rating{
   width: 300px;
   margin-left: 120px;
-  margin-top:111px;
+  margin-top:150px;
   /* background-color: cyan; */
   display: flex;
   position: absolute;
@@ -166,6 +181,12 @@ p.artic{
 #ilegwizd{
   margin-left: 15px;
   color: #ffdf00;
+}
+
+#ilegwizd2{
+  margin-left: 15px;
+  font-size: 18px;
+  color: #FFC404;
 }
 
 #addstar{

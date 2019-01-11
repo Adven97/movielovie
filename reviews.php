@@ -11,7 +11,7 @@ require_once 'connect.php';
     }
     else {
 
-      $query4="SELECT * FROM articles";
+      $query4="SELECT * FROM reviews";
       if($rezultat4 =@$polaczenie->query($query4) ){
         if($rezultat4->num_rows>0){
 
@@ -19,15 +19,17 @@ require_once 'connect.php';
         while($wiersz = $rezultat4->fetch_assoc()){
 
           $idd[$i] = $wiersz['id'];
-          $tytul[$i] = $wiersz['article_title'];
+          $tyt[$i] = $wiersz['title'];
+          $tytul[$i] = $wiersz['review_title'];
           $zdj[$i]=$wiersz['image'];
+          $calytyt[$i] = $tytul[$i].' - Recenzja filmu '.$tyt[$i];
 
           $i=$i+1;
         }
-        $articles="";
+        $reviews="";
         for ($x = $i-1; $x >=0; $x--) {
-         $link ="article+".$idd[$x];
-         $articles .= "<a class='artik' href='articles/$link.php'><p>$tytul[$x]<img src='style/img/$zdj[$x]' alt='' height='auto' width='620'> </p></a>";
+         $link ="review+".$idd[$x];
+         $reviews .= "<a class='artik' href='reviews/$link.php'><p>$calytyt[$x]<img src='style/img/$zdj[$x]' alt='' height='auto' width='620'> </p></a>";
        }
 
         }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
@@ -61,16 +63,16 @@ require_once 'connect.php';
 }
 .artik, .artik:visited, .artik:active{
    text-decoration: none;
-   color: #101010;
+   color: #100000;
 }
-.artik:hover{
-  transform: scale(1.08);
+ a.artik:hover{
+
   text-decoration: underline;
   color: #000000;
 }
   </style>
 
-  <title>MovieLovie - Newsy</title>
+  <title>MovieLovie - Recenzje</title>
 </head>
 <body>
   <div id="container">
@@ -105,10 +107,9 @@ require_once 'connect.php';
     </div>
   </div>
     <div class="newsfeed">
-      <h2>newsy</h2>
-      <a class="artic" href="articles/addNew.php"><button class ="btn">Dodaj nowy artykuł</button></a>
+      <h2>Recenzje</h2>
       <article>
-        <?php echo $articles ?>
+        <?php echo $reviews ?>
 
       </article>
     </div>

@@ -29,8 +29,21 @@ require_once 'connect.php';
         }
         $filmys="";
         for ($x = 0; $x < $i; $x++) {
-        // $actor_site =strtolower($actor_name[$x])."_".strtolower($actor_lname[$x]);
-         $filmys .= "<li><a class='nv' href='movies/$idd[$x].php'><div class='film-div'><div class='mini-poster'><img src='style/img/$idd[$x].jpg' alt='movie poster' style='width: 90px; height: 130px;'></div><div class='mini-info-box'><h3 class='tit'>$tytul[$x] ($d[$x])</h3><i class='iii'>$dlugosc[$x] min</i></div></div></a></li>";
+          if($rezultat6 =@$polaczenie->query("SELECT AVG(grade) as avgrade FROM movies_rated WHERE title='$tytul[$x]' ") ){
+            if($rezultat6->num_rows>0){
+
+            $wiersz6 = $rezultat6->fetch_assoc();
+            $srednia = $wiersz6['avgrade'];
+            //$ocenaa = "Film oceniono na $ocenka / 5";
+            $filmys .= "<li><a class='nv' href='movies/$idd[$x].php'><div class='film-div'><div class='mini-poster'><img src='style/img/$idd[$x].jpg' alt='movie poster' style='width: 90px; height: 130px;'></div><div class='mini-info-box'><h3 class='tit'>$tytul[$x] ($d[$x])</h3> <i class='iii'>$dlugosc[$x] min</i></div> <span id='srd'>Średnia ocena: $srednia </span></div></a></li>";
+
+            }else{
+            //  $ocenaa ="Nie oceniono tego filmu";
+            }
+            $rezultat6->free_result();
+          }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+
        }
 
 
@@ -58,15 +71,16 @@ require_once 'connect.php';
   }
     .film-div{
       margin-top: 10px;
+      border-radius: 12px;
       height: 130px;
       width:100%;
       margin-left: 0px;
       margin-right: 0px;
-      background-color: cyan
+      background-color:#D9D9D9;
     }
     .film-div:hover{
       transform: scale(1.08);
-      transition: .3s
+      transition: .3s;
     }
     .mini-poster{
       float: left;
@@ -78,7 +92,13 @@ require_once 'connect.php';
       font-size: 19px;
     }
     .tit{
-      font-size: 23px;
+      font-size: 27px;
+    }
+    #srd{
+      margin-bottom: 20px;
+        font-size: 25px;
+      margin-left: 510px;
+      color: 	#B8860B;
     }
     ul{
       list-style: none;
@@ -116,10 +136,10 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
 
     <div style="clear:both"></div>
     <div id="button-bar">
-    <a href="#"><div class="top-btn">filmy</div></a>
+    <a href="movies.php"><div class="top-btn">filmy</div></a>
     <a href="#"><div class="top-btn">seriale</div></a>
     <a href="#"><div class="top-btn">ludzie kina</div></a>
-    <a href="#"><div class="top-btn">newsy</div></a>
+    <a href="articles.php"><div class="top-btn">newsy</div></a>
     <a href="#"><div class="top-btn">premiery</div></a>
     <a href="#"><div class="top-btn">zwiastuny</div></a>
     </div>
@@ -129,18 +149,7 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
       <div class="filmys">
         <ul>
           <?php echo $filmys; ?>
-          <!-- <li>
-            <a class="nv" href="movies/1.php">
-            <div class="film-div">
-              <div class="mini-poster">
-                <img src="style/img/1.jpg" alt="movie poster" style='width: 90px; height: 130px;'>
-              </div>
-              <div class="mini-info-box">
-                <h3 class="tit">$tytul ($d)</h3>
-                <i class="iii">dlugosc</i>
-              </div>
-            </div></a>
-          </li> -->
+
         </ul>
       </div>
     </div>

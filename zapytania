@@ -260,3 +260,20 @@ require_once 'connect.php';
 
 
 INSERT INTO `articles` (`id`, `author_name`, `author_last_name`, `author_nick`, `article_title`, `article`) VALUES (NULL, 'Adam', 'Tomczak', 'Adven97', 'Jay i Cichy Bob w drodze na ekran', 'Za pomocą Twittera reżyser Kevin Smith poinformował fanów, że właśnie rozpoczął preprodukcję nowej odsłony \"Jaya i Cichego Boba\".\r\n\r\n\"Jay And Silent Bob Get A Reboot\" opowie o tym, jak dwaj tytułowi bohaterowie wracają do Hollywood, by powstrzymać realizację rebootu znienawidzonego przez nich filmu \"Bluntman & Chronic Movie\". Ma to być satyra na przemysł filmowy i jego ostatnią obsesję remake\'ów i rebootów. \r\n\r\nW rolach głównych zobaczymy oczywiście  Smitha i Jasona Mewesa. W obsadzie są również Harley Quinn Smith, Keith Coogan, Ralph Garman i Brian O\'Halloran.\r\n\r\nJay i Bob pojawili się po raz pierwszy na ekranie w 1994 roku w debiutanckim filmie Smitha, \"Sprzedawcy\". Ostatnio mogliśmy ich zobaczyć w animacji \"Jay and Silent Bob\'s Super Groovy Cartoon Movie\" z 2013 roku.');
+
+zapytanie na srednia filmu : SELECT AVG(grade) as avgrade FROM movies_rated WHERE title='Zombieland'
+
+
+<Button
+        android:id="@+id/toggleButton"
+        android:onClick="onTButtonClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-100dp"
+        android:text="Not Active" />
+
+         AIzaSyBqkAxk8CY5ijjhq2CoDnE-x_SjY8CWdXw
+
+         SELECT * FROM `movies` where movie_title in (SELECT title from movies_rated WHERE login = 'Adven97');

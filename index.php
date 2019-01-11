@@ -1,6 +1,68 @@
 <?php
 session_start();
+
+require_once 'connect.php';
+
+    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+    $polaczenie->set_charset("utf8");
+
+    if($polaczenie->connect_errno !=0){
+      echo "Error ".$polaczenie->connect_errno;
+    }
+    else {
+
+      if($rezultat4 =@$polaczenie->query("SELECT * FROM articles") ){
+        if($rezultat4->num_rows>0){
+
+        $i=0;
+        while($wiersz = $rezultat4->fetch_assoc()){
+
+          $idd[$i] = $wiersz['id'];
+          $tytul[$i] = $wiersz['article_title'];
+          $zdj[$i]=$wiersz['image'];
+
+          $i=$i+1;
+        }
+        $articles="";
+        for ($x = $i-1; $x >=$i-4; $x--) {
+         $link ="article+".$idd[$x];
+         $articles .= "<a class='artic' href='articles/$link.php'><p>$tytul[$x]<img src='style/img/$zdj[$x]' alt='' height='auto' width='620'> </p></a>";
+       }
+
+        }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+        $rezultat4->free_result();
+      }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+
+
+      if($rezultat44 =@$polaczenie->query("SELECT * FROM trailers")){
+        if($rezultat44->num_rows>0){
+
+        $i=0;
+        while($wiersz1 = $rezultat44->fetch_assoc()){
+
+          $idd[$i] = $wiersz1['id'];
+          $tytul[$i] = $wiersz1['title'];
+          $url[$i]=$wiersz1['url'];
+
+          $i=$i+1;
+        }
+        $trailers="";
+        for ($x = $i-1; $x >=$i-3; $x--) {
+         $trailers .= "<p>$tytul[$x]</br><iframe width='620' height='360' src='https://www.youtube.com/embed/$url[$x]'></iframe></p>";
+       }
+
+        }
+        else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+        $rezultat44->free_result();
+
+        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+        $polaczenie->close();
+        }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -9,6 +71,12 @@ session_start();
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style/pasek.css" type="text/css">
   <link rel="stylesheet" href="style/style.css" type="text/css">
+  <style>
+  .artic:hover{
+    transform: scale(1.08);
+    transition: .3s
+  }
+  </style>
 
   <title>MovieLovie</title>
 </head>
@@ -36,41 +104,22 @@ session_start();
 
     <div style="clear:both"></div>
     <div id="button-bar">
-    <a href="movies.php"><div class="top-btn">filmy</div></a>
-    <a href="#"><div class="top-btn">seriale</div></a>
-    <a href="#"><div class="top-btn">ludzie kina</div></a>
-    <a href="articles.php"><div class="top-btn">newsy</div></a>
-    <a href="#"><div class="top-btn">premiery</div></a>
-    <a href="#"><div class="top-btn">zwiastuny</div></a>
+    <a href="movies.php"><div class="top-btn">Filmy</div></a>
+    <a href="#"><div class="top-btn">Seriale</div></a>
+    <a href="#"><div class="top-btn">Ludzie kina</div></a>
+    <a href="articles.php"><div class="top-btn">Newsy</div></a>
+    <a href="reviews.php"><div class="top-btn">Recenzje</div></a>
+    <a href="trailers.php"><div class="top-btn">Zwiastuny</div></a>
     </div>
   </div>
     <div class="newsfeed">
       <h2>newsy</h2>
       <article>
-        <p>Jay i Cichy Bob w drodze na ekran
-         <img src="style/img/jay.jpg" alt="Jay and silent Bob" height="auto" width="620"> </p>
-
-        <p>Gary Oldman chce znów zagrać Churchilla</br>
-        <img src="style/img/oldman.jpg" alt="Gary Oldman" height="auto" width="620"> </p>
-
-        <p>"Aquaman" największym hitem w historii DCEU poza granicami USA
-        <img src="style/img/kasa.jpg" alt="kasa" height="auto" width="620"></p>
-
-        <p>Kevin Spacey usłyszał zarzuty. W odpowiedzi opublikował wideo</br>
-        <img src="style/img/ks.jpg" alt="kevin spacey" height="auto" width="620"></p>
+        <?php echo $articles ?>
 
         <h2>zwiastuny</h2>
 
-         <p>Czarne lustro: Bandersnatch</br>
-         <iframe width="620" height="360" src="https://www.youtube.com/embed/hVWSqUHQwF4"></iframe></p>
-
-         <p>Godzilla II: Król potworów</br>
-         <iframe width="620" height="360" src="https://www.youtube.com/embed/KDnKuFtdc7A"></iframe></p>
-         <p>Men in Black: International</br>
-         <iframe width="620" height="360" src="https://www.youtube.com/embed/qvXzEhXujxA"></iframe></p>
-         <p>Us</br>
-         <iframe width="620" height="360" src="https://www.youtube.com/embed/hNCmb-4oXJA"></iframe></p>
-
+         <?php echo $trailers ?>
 
          <h2>dobre filmy</h2>
          <div class="filmy">
@@ -79,22 +128,10 @@ session_start();
            <p class="film"><a class="movi" href="movies/2.php">Ciche mjejsce</a></p>
          </div>
 
-
       </article>
     </div>
     </div>
   </div>
-
-  <script>
-  /*
-  document.querySelector('.login_name').onmouseover = function(){
-    document.querySelector('.hower').style.display = 'block';
-  }
-  document.querySelector('.login_name').onmouseout = function(){
-    document.querySelector('.hower').style.display = 'none';
-  }*/
-
-  </script>
 
 </body>
 </html>

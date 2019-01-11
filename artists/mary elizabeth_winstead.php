@@ -11,11 +11,9 @@ require_once '../connect.php';
     }
     else {
       $mainid =1;
-      $artist_name ="Emma";
-      $artist_lname ="Stone";
-      $img_name="emma_stone";
-      $castheader ="";
-      $crewheader ="";
+      $artist_name ="Mary Elizabeth";
+      $artist_lname ="Winstead";
+      $img_name="mary_elizabeth_winstead";
 
       //$sql="SELECT * FROM artist WHERE name='$artist_name' and last_name='$artist_lname'";
       if($rezultat =@$polaczenie->query("SELECT * FROM artist WHERE name='$artist_name' and last_name='$artist_lname'") ){
@@ -25,57 +23,10 @@ require_once '../connect.php';
           $data= $wiersz['birth_day'];
           $country = $wiersz['country'];
 
-        }else{echo "<script type='text/javascript'>alert('niepyklo 10');</script>";}
+        }else{echo "<script type='text/javascript'>alert('niepyklo 1');</script>";}
 
           $rezultat->free_result();
         }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
-
-        if($rezultat2 =@$polaczenie->query("SELECT * FROM `cast` INNER JOIN movies ON cast.title = movies.movie_title where name='$artist_name' and last_name='$artist_lname' order by release_date DESC ") ){
-          if($rezultat2->num_rows>0){
-            $castheader='<h2>Aktor</h2>';
-            $i=0;
-            while($wiersz2 = $rezultat2->fetch_assoc()){
-
-            $role[$i]= $wiersz2['role'];
-            $movie_tit[$i] = $wiersz2['title'];
-            $filmidd[$i] = $wiersz2['id'];
-            $dataa[$i]= $wiersz2['release_date'];
-            $datee[$i] = DateTime::createFromFormat("Y-m-d", $dataa[$i]);
-            $dd[$i] = $datee[$i]->format("Y");
-
-            $i =$i+1;
-          }
-          $rolee='';
-         //  for ($x = 0; $x < $i; $x++) {
-         //    $temptit = $movie_tit[$x];
-         //    if($rezultat3 =@$polaczenie->query("SELECT * FROM movies WHERE movie_title='$temptit'") ){
-         //      if($rezultat3->num_rows>0){
-         //        $wiersz3 = $rezultat3->fetch_assoc();
-         //
-         //        $filmidd[$x] = $wiersz3['id'];
-         //        $dataa[$x]= $wiersz3['release_date'];
-         //        $datee[$x] = DateTime::createFromFormat("Y-m-d", $dataa[$x]);
-         //        $dd[$x] = $datee[$x]->format("Y");
-         //
-         //
-         //
-         //      }else{echo "<script type='text/javascript'>alert('niepyklo 1');</script>";}
-         //
-         //        $rezultat3->free_result();
-         //      }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
-         // }
-         //rsort($dd);
-         for ($xx = 0; $xx < $i; $xx++) {
-          // $key =array_search($dd[$xx], $dd);
-         $rolee .= "<li><div class ='aktor'><p class='para'><span class='span0'>$dd[$xx]</span <span class='span1'><a class='axd' href = '../movies/$filmidd[$xx].php'>$movie_tit[$xx]</a></span><span class= 'span2'>$role[$xx]</span> </p></div></li>";
-          }
-
-          }else{}
-
-            $rezultat2->free_result();
-          }else{}
-
-
 
         $polaczenie->close();
         }
@@ -90,29 +41,7 @@ require_once '../connect.php';
   <link rel="stylesheet" href="../style/pasek.css" type="text/css">
   <link rel="stylesheet" href="../style/style.css" type="text/css">
   <link rel="stylesheet" href="../style/movie.css" type="text/css">
-  <style>
-  .span0{
-    margin-left: 10px;
-    margin-right: 25px;
-  }
-  .span1{
-    margin-right: 80px;
-  }
-  .span2{
-    margin-left: 80px;
-  }
-  .aktor{
-    width: 450px;
-    height: 35px;
-    background-color:#D9D9D9;
-  }
-  .axd:hover{
-    color: #FFa056;
-    text-decoration: underline;
-  }
-
-  </style>
-  <?php  echo"<title>$artist_name $artist_lname</title>"; ?>
+  <title>Document</title>
 </head>
 <body>
   <div id="container">
@@ -162,8 +91,8 @@ echo<<<END
 
     </div>
     <div class="obsada">
-      <h1 class="title">Filmografia</h1>$castheader
-      <ul>$rolee</ul>
+      <h1 class="title">Filmografia</h1>
+      <ul>tu bedzie filmografia</ul>
     </div>
 END
     ?>

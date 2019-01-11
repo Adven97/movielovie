@@ -10,7 +10,7 @@ require_once '../connect.php';
       echo "Error ".$polaczenie->connect_errno;
     }
     else {
-      $mainid =2;
+      $mainid =4;
       $director = "reżyseria";
       $writer ="scenariusz";
       $ocenaa ='Zaloguj sie by ocenić';

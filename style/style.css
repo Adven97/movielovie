@@ -21,7 +21,7 @@ body{
   width: 88%;
   margin-top: 0px;
   padding-top: 0px;
-  min-height: 3900px;
+  /* min-height: 3900px; */
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
@@ -37,6 +37,13 @@ h2{
 .newsfeed{
   width:650px;
   /* height:350px; */
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 23px;
+}
+.newsfeed_rev{
+  width:650px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   font-size: 23px;
@@ -58,9 +65,13 @@ a.movi:hover{
   color:#980000;
 }
 
-a.artic, a.artic:visited, a.artic:hover, a.artic:active{
+a.artic, a.artic:visited, a.artic:active{
    text-decoration: none;
    color: #100000
+}
+a.artic:hover{
+  transform: scale(1.08);
+  transition: .3s;
 }
 
 .tyt-newsa{
