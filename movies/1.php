@@ -347,12 +347,12 @@ background-color: #505050;
      ?>
     <div style="clear:both"></div>
     <div id="button-bar">
-    <a href="#"><div class="top-btn">filmy</div></a>
-    <a href="#"><div class="top-btn">seriale</div></a>
-    <a href="#"><div class="top-btn">ludzie kina</div></a>
-    <a href="#"><div class="top-btn">newsy</div></a>
-    <a href="#"><div class="top-btn">premiery</div></a>
-    <a href="#"><div class="top-btn">zwiastuny</div></a>
+      <a href="../movies.php"><div class="top-btn">Filmy</div></a>
+      <a href="../series.php"><div class="top-btn">Seriale</div></a>
+      <a href="../artists.php"><div class="top-btn">Ludzie kina</div></a>
+      <a href="../articles.php"><div class="top-btn">Newsy</div></a>
+      <a href="../reviews.php"><div class="top-btn">Recenzje</div></a>
+      <a href="../trailers.php"><div class="top-btn">Zwiastuny</div></a>
     </div>
   </div>
     <div class="poster">

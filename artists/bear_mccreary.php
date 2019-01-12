@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -11,35 +12,39 @@ require_once '../connect.php';
     }
     else {
       $mainid =1;
-      $artist_name ="Trey";
-      $artist_lname ="Parker";
-      $img_name="treypar";
+      $artist_name ="Bear";
+      $artist_lname ="McCreary";
+      $img_name="bear";
       $castheader ="";
       $crewheader ="";
-      $rolee='';
-      $rolee2='';
-      $rolee3='';
 
-      //$sql="SELECT * FROM artist WHERE name='$artist_name' and last_name='$artist_lname'";
       if($rezultat =@$polaczenie->query("SELECT * FROM artist WHERE name='$artist_name' and last_name='$artist_lname'") ){
         if($rezultat->num_rows>0){
           $wiersz = $rezultat->fetch_assoc();
 
-          $data= $wiersz['birth_day'];
-          $country = $wiersz['country'];
+          $dattta= $wiersz['birth_day'];
+            $dateexx = DateTime::createFromFormat("Y-m-d", $dattta);
+            $ddxx = $dateexx->format("Y");
+            if($ddxx<1800){
+              $data="";
+            }
+            else{
+              $data=$dattta;
+            }
+            $country = $wiersz['country'];
 
         }else{echo "<script type='text/javascript'>alert('niepyklo 10');</script>";}
 
           $rezultat->free_result();
         }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
 
-        if($rezultat2 =@$polaczenie->query("SELECT * FROM `cast` INNER JOIN movies ON cast.title = movies.movie_title where name='$artist_name' and last_name='$artist_lname' order by release_date DESC ") ){
+        if($rezultat2 =@$polaczenie->query("SELECT * FROM `crew` INNER JOIN movies ON crew.title = movies.movie_title where name='$artist_name' and last_name='$artist_lname' order by release_date DESC ") ){
           if($rezultat2->num_rows>0){
             $castheader='<h2>Aktor</h2>';
             $i=0;
             while($wiersz2 = $rezultat2->fetch_assoc()){
 
-            $role[$i]= $wiersz2['role'];
+            $role[$i]= $wiersz2['credit'];
             $movie_tit[$i] = $wiersz2['title'];
             $filmidd[$i] = $wiersz2['id'];
             $dataa[$i]= $wiersz2['release_date'];
@@ -49,6 +54,7 @@ require_once '../connect.php';
             $i =$i+1;
           }
           $rolee='';
+
          for ($xx = 0; $xx < $i; $xx++) {
           // $key =array_search($dd[$xx], $dd);
          $rolee .= "<li><div class ='aktor'><p class='para'><span class='span0'>$dd[$xx]</span <span class='span1'><a class='axd' href = '../movies/$filmidd[$xx].php'>$movie_tit[$xx]</a></span><span class= 'span2'>$role[$xx]</span> </p></div></li>";
@@ -60,54 +66,6 @@ require_once '../connect.php';
           }else{}
 
 
-            if($rezultat3 =@$polaczenie->query("SELECT * FROM `cast` INNER JOIN series ON cast.title = series.series_title where name='$artist_name' and last_name='$artist_lname' ") ){
-              if($rezultat3->num_rows>0){
-            //    $castheader='<h2>Aktor</h2>';
-                $i=0;
-                while($wiersz3 = $rezultat3->fetch_assoc()){
-
-                $role[$i]= $wiersz3['role'];
-                $movie_tit[$i] = $wiersz3['title'];
-                $filmidd[$i] = $wiersz3['id'];
-                $dd[$i] = $wiersz3['start_year'];
-
-                $i =$i+1;
-              }
-              $rolee3='';
-             for ($xx = 0; $xx < $i; $xx++) {
-              // $key =array_search($dd[$xx], $dd);
-             $rolee3 .= "<li><div class ='aktor33'><p class='para'><span class='span0'>$dd[$xx]</span <span class='span1'><a class='axd' href = '../series/$filmidd[$xx].php'>$movie_tit[$xx]</a></span><span class= 'span2'>$role[$xx]</span> </p></div></li>";
-              }
-
-              }else{}
-
-                $rezultat3->free_result();
-              }else{}
-
-
-            if($rezultat20 =@$polaczenie->query("SELECT * FROM `crew` INNER JOIN series ON crew.title = series.series_title where name='$artist_name' and last_name='$artist_lname' ") ){
-              if($rezultat20->num_rows>0){
-                $crewheader='<h2>Twórca</h2>';
-                $i=0;
-                while($wiersz20 = $rezultat20->fetch_assoc()){
-
-                $role[$i]= $wiersz20['credit'];
-                $movie_tit[$i] = $wiersz20['title'];
-                $filmidd[$i] = $wiersz20['id'];
-                //$ddx[$i] = $wiersz3['start_year'];
-
-                $i =$i+1;
-              }
-              $rolee2='';
-             for ($xx = 0; $xx < $i; $xx++) {
-              // $key =array_search($dd[$xx], $dd);
-             $rolee2 .= "<li><div class ='aktor'><p class='para'><span class='span0'>$dd[$xx]</span <span class='span1'><a class='axd' href = '../movies/$filmidd[$xx].php'>$movie_tit[$xx]</a></span><span class= 'span2'>$role[$xx]</span> </p></div></li>";
-              }
-
-              }else{}
-
-                $rezultat20->free_result();
-              }else{}
 
         $polaczenie->close();
         }
@@ -136,11 +94,6 @@ require_once '../connect.php';
   .aktor{
     width: 450px;
     height: 35px;
-    background-color:#D9D9D9;
-  }
-  .aktor33{
-    width: 550px;
-    /* height: 35px; */
     background-color:#D9D9D9;
   }
   .axd:hover{
@@ -174,12 +127,12 @@ require_once '../connect.php';
      ?>
     <div style="clear:both"></div>
     <div id="button-bar">
-    <a href="#"><div class="top-btn">filmy</div></a>
-    <a href="#"><div class="top-btn">seriale</div></a>
-    <a href="#"><div class="top-btn">ludzie kina</div></a>
-    <a href="#"><div class="top-btn">newsy</div></a>
-    <a href="#"><div class="top-btn">premiery</div></a>
-    <a href="#"><div class="top-btn">zwiastuny</div></a>
+      <a href="../movies.php"><div class="top-btn">Filmy</div></a>
+      <a href="../series.php"><div class="top-btn">Seriale</div></a>
+      <a href="../artists.php"><div class="top-btn">Ludzie kina</div></a>
+      <a href="../articles.php"><div class="top-btn">Newsy</div></a>
+      <a href="../reviews.php"><div class="top-btn">Recenzje</div></a>
+      <a href="../trailers.php"><div class="top-btn">Zwiastuny</div></a>
     </div>
   </div>
   <div style="clear:both"></div>
@@ -199,13 +152,8 @@ echo<<<END
 
     </div>
     <div class="obsada">
-      <h1 class="title">Filmografia</h1>
-      $castheader
+      <h1 class="title">Filmografia</h1><h2>Twórca</h2>
       <ul>$rolee</ul>
-      <h2>Seriale</h2>
-      <ul>$rolee3</ul>
-      $crewheader
-      <ul>$rolee2</ul>
     </div>
 END
     ?>

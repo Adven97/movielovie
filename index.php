@@ -74,14 +74,14 @@ require_once 'connect.php';
             $nazwiskorec[$i] = $wiersz44['author_last_name'];
 
             $zdj[$i]=$wiersz44['image'];
-            $calytyt[$i] = $tytulrec[$i].' - Recenzja filmu '.$tytxdxd[$i];
+            $calytyt[$i] = $tytulrec[$i].' - Recenzja '.$tytxdxd[$i];
 
             $i=$i+1;
           }
 
           for ($x = $i-1; $x >=$i-3; $x--) {
            $link ="reviews/review+".$iddd[$x];
-           $reviews .= "<a class='artik' href='reviews/$link.php'><p>$calytyt[$x]<br><i> Autor: $imierec[$x] $nazwiskorec[$x]</i></p></a>";
+           $reviews .= "<a class='artik' href='$link.php'><p>$calytyt[$x]<br><i> Autor: $imierec[$x] $nazwiskorec[$x]</i></p></a>";
          }
 
           }else{}
@@ -146,7 +146,7 @@ require_once 'connect.php';
     <div id="button-bar">
     <a href="movies.php"><div class="top-btn">Filmy</div></a>
     <a href="series.php"><div class="top-btn">Seriale</div></a>
-    <a href="#"><div class="top-btn">Ludzie kina</div></a>
+    <a href="artists.php"><div class="top-btn">Ludzie kina</div></a>
     <a href="articles.php"><div class="top-btn">Newsy</div></a>
     <a href="reviews.php"><div class="top-btn">Recenzje</div></a>
     <a href="trailers.php"><div class="top-btn">Zwiastuny</div></a>

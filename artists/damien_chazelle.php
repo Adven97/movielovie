@@ -14,7 +14,7 @@ require_once '../connect.php';
       $mainid =1;
       $artist_name ="Damien";
       $artist_lname ="Chazelle";
-      $img_name="noname";
+      $img_name="chazele";
       $castheader ="";
       $crewheader ="";
 

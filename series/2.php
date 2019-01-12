@@ -125,7 +125,7 @@ require_once '../connect.php';
           $wiersz5 = $rezultat5->fetch_assoc();
           $ocenka = $wiersz5['grade'];
           $ocenaa = "Film oceniono na $ocenka / 5";
-          $prycisk= "<div id ='dodajrec'><a class='artic' href='../reviews/addReview.php'><button class ='btn'>Dodaj recenzję</button></a></div>";
+          $prycisk= "<div id ='dodajrec'><a class='artic' href='../reviews/addReviewSerialu.php'><button class ='btn'>Dodaj recenzję</button></a></div>";
           $_SESSION['tytdorec'] = $tytul;
           $_SESSION['ocenadorec'] = $ocenka;
           }else{
@@ -163,7 +163,7 @@ require_once '../connect.php';
             $nazwiskorec[$i] = $wiersz44['author_last_name'];
 
             $zdj[$i]=$wiersz44['image'];
-            $calytyt[$i] = $tytulrec[$i].' - Recenzja filmu '.$tytxdxd[$i];
+            $calytyt[$i] = $tytulrec[$i].' - Recenzja serialu '.$tytxdxd[$i];
 
             $i=$i+1;
           }
@@ -289,12 +289,12 @@ h1.title12 {
      ?>
     <div style="clear:both"></div>
     <div id="button-bar">
-    <a href="#"><div class="top-btn">filmy</div></a>
-    <a href="#"><div class="top-btn">seriale</div></a>
-    <a href="#"><div class="top-btn">ludzie kina</div></a>
-    <a href="#"><div class="top-btn">newsy</div></a>
-    <a href="#"><div class="top-btn">premiery</div></a>
-    <a href="#"><div class="top-btn">zwiastuny</div></a>
+      <a href="../movies.php"><div class="top-btn">Filmy</div></a>
+      <a href="../series.php"><div class="top-btn">Seriale</div></a>
+      <a href="../artists.php"><div class="top-btn">Ludzie kina</div></a>
+      <a href="../articles.php"><div class="top-btn">Newsy</div></a>
+      <a href="../reviews.php"><div class="top-btn">Recenzje</div></a>
+      <a href="../trailers.php"><div class="top-btn">Zwiastuny</div></a>
     </div>
   </div>
     <div class="poster">
@@ -507,7 +507,7 @@ function insertKurwa(){
     if ($rr=$conn->query("SELECT * FROM movies_rated WHERE title='$tytul' and login='$login'")) {
       if($rr->num_rows==0){
 
-          if($conn->query("UPDATE users SET movies_watched = movies_watched+1, time_spent=time_spent+$runtime where login ='$login'")){
+          if($conn->query("UPDATE users SET movies_watched = movies_watched+1 where login ='$login'")){
             echo "document.getElementById('ilegwizd').innerHTML ='Film oceniono dobazzy';";
             //$execued=true;
           }

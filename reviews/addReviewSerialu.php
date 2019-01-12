@@ -18,7 +18,7 @@ require_once '../connect.php';
     }
     else {
 
-      $query4="SELECT * FROM articles where id =$mainid";
+      $query4="SELECT * FROM reviews where id =$mainid";
       if($rezultat4 =@$polaczenie->query($query4) ){
         if($rezultat4->num_rows>0){
 
@@ -28,15 +28,17 @@ require_once '../connect.php';
           $alastname =$wiersz['author_last_name'];
 
           $idd = $wiersz['id'];
-          $tytul = $wiersz['article_title'];
-          $tresc = $wiersz['article'];
+          $tytt = $wiersz['title'];
+          $tytul = $wiersz['review_title'];
+          $tresc = $wiersz['review'];
 
           $zddj = $wiersz['image'];
+          $calytyt = $tytul.' - Recenzja serialu'.$tytt;
 
 
-        }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+        }else{}
         $rezultat4->free_result();
-      }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+      }else{}
 
         $polaczenie->close();
         }
@@ -101,10 +103,11 @@ require_once '../connect.php';
 
 <?php
 ECHO<<<ENDx
-<h2 class="tyt-newsa">$tytul</h2>
+<h2 class="tyt-newsa">$calytyt</h2>
 <article>
   <p class ="autor"><i>Autor: $aname $alastname</i></p>
   <p>$tresc</p>
+  <p><i><b>Ocena serialu : ocenauserra/5</b></i></p>
   <img src="../style/img/$zddj" alt="" height="auto" width="620"></p></a>
 ENDx
  ?>
@@ -126,13 +129,17 @@ END;
         if(isset($_POST['submit'])){
         $wszystko_OK=true;
 
+        //if(isset($_FILES['filexd']) || isset($_POST['filexd'])){
+
         $file = $_FILES['filexd'];
 
         $fileName = $_FILES['filexd']['name'];
+        if(strlen($fileName) != 0){
         $fileTmpName = $_FILES['filexd']['tmp_name'];
         $fileSize = $_FILES['filexd']['size'];
         $fileError = $_FILES['filexd']['error'];
         $fileType = $_FILES['filexd']['type'];
+
 
         $fileExt =explode('.',$fileName);
         $fileActualExt =strtolower(end($fileExt));
@@ -188,6 +195,7 @@ END;
           $wszystko_OK=false;
           $_SESSION['e3']="cos z tablica";
         }
+      }
 
         $imie= $_SESSION['name'];
         $nazwisko = $_SESSION['last_name'];
@@ -197,16 +205,11 @@ END;
         $artykul = $_POST['tresc'];
         $artykul=nl2br($artykul);
 
-        if ((strlen($tyt)<10))
-        {
-            $wszystko_OK=false;
-            $_SESSION['e1']="Troche za krótki ten tytuł";
-        }
 
         if (strlen($artykul)<80)
         {
             $wszystko_OK=false;
-            $_SESSION['e2']="Troche za krótki ten artykuł";
+            $_SESSION['e2']="Troche za krótka ta recenzja";
         }
 
 
@@ -224,8 +227,8 @@ END;
            else{
 
               if ($wszystko_OK==true){
-                //$sql="INSERT INTO articles (id, author_name, author_last_name, author_nick, image, article_title, article) VALUES (NULL, '$imie', '$nazwisko', '$login','xd' '$tyt', '$artykul');";
-                $sql="INSERT INTO articles (id, author_name, author_last_name, author_nick, image, article_title, article) VALUES (null, '$imie', '$nazwisko', '$login', '$fileNameNew', '$tyt', '$artykul');";
+                $tytfilmu=$_SESSION['tytdorec'];
+                $sql="INSERT INTO reviews (id, author_name, author_last_name, author_nick, image, review_title, review, title) VALUES (null, '$imie', '$nazwisko', '$login', '$fileNameNew', '$tyt', '$artykul','$tytfilmu');";
 
                 if($rezultat =@$polaczenie->query($sql) ){
                   header('Location: ../index.php');
@@ -234,17 +237,18 @@ END;
                   throw new Exception($polaczenie->error);
                   }
 
-                  //$sql="INSERT INTO articles (id, author_name, author_last_name, author_nick, image, article_title, article) VALUES (6, '$imie', '$nazwisko', '$login', '$fileNameNew', '$tyt', '$artykul');";
-
-                  if($rezultat2 =@$polaczenie->query("SELECT * from articles where article_title='$tyt'") ){
+                  if($rezultat2 =@$polaczenie->query("SELECT * from reviews where review_title='$tyt'") ){
                     if($rezultat2->num_rows>0){
                       $wiersz = $rezultat2->fetch_assoc();
                         $iidd = $wiersz['id'];
+                        $ocenuserka2 = $_SESSION['ocenadorece'];
 
                         $allcontent =str_replace('tujestglowneid',$iidd,$content);
+                        $allcontent2 =str_replace('ocenauserra',$ocenuserka2,$allcontent);
 
-                        $fp=fopen("article+$iidd.php",'w');
-                        fwrite($fp, "$allcontent");
+
+                        $fp=fopen("review+$iidd.php",'w');
+                        fwrite($fp, "$allcontent2");
                         fclose($fp);
                     }
                     else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
@@ -280,7 +284,7 @@ END;
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../style/style_register.css" type="text/css">
   <link rel="stylesheet" href="../style/pasek.css" type="text/css">
-  <title>Dodaj nowy post</title>
+  <title>Dodaj recenzję</title>
   <style media="screen">
   .boxx{
       border-radius: 12px;
@@ -319,9 +323,9 @@ END;
     border-radius: 7px;
     font-family: 'Raleway', sans-serif;
     margin-top: 35px;
-    width: 400px;
+    width: 200px;
     height: 50px;
-    margin-left: 200px;
+    margin-left: 100px;
   }
   .btn2:hover{
     background-color: #b7b7b7;
@@ -351,8 +355,7 @@ END;
     else{
     echo '<a href="../register.php"><div class="log-btn">zarejstruj sie</div></a>';
     echo '<a href="../login.php"><div class="log-btn">zaloguj sie</div></a>';
-   }
-     ?>
+  }?>
     <div style="clear:both"></div>
     <div id="button-bar">
       <a href="../movies.php"><div class="top-btn">Filmy</div></a>
@@ -366,7 +369,7 @@ END;
 <div class="boxx">
     <div class="login">
     <form method="post" enctype="multipart/form-data">
-      <h1 class="hhh">Dodaj nowy post</h2>
+      <h1 class="hhh">Dodaj nową recenzję</h2>
       <input class="inp2" type="text" name="tyt" placeholder="Tytuł" /><br /><br />
       <?php
           if (isset($_SESSION['e1']))
@@ -391,7 +394,7 @@ END;
               unset($_SESSION['e3']);
           }
       ?>
-      <input class="btn2" type="submit" name="submit" value="Dodaj">
+      <input class="btn2" type="submit" name="submit" value="Dodaj recenzję">
 
     </form>
     </div>

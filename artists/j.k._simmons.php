@@ -14,7 +14,7 @@ require_once '../connect.php';
       $mainid =1;
       $artist_name ="J.K.";
       $artist_lname ="Simmons";
-      $img_name="noname";
+      $img_name="jksim";
       $castheader ="";
       $crewheader ="";
 
@@ -164,5 +164,3 @@ END
 
 </body>
 </html>
-
-    

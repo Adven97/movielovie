@@ -102,7 +102,7 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
     <div id="button-bar">
       <a href="movies.php"><div class="top-btn">Filmy</div></a>
       <a href="series.php"><div class="top-btn">Seriale</div></a>
-      <a href="#"><div class="top-btn">Ludzie kina</div></a>
+      <a href="artists.php"><div class="top-btn">Ludzie kina</div></a>
       <a href="articles.php"><div class="top-btn">Newsy</div></a>
       <a href="reviews.php"><div class="top-btn">Recenzje</div></a>
       <a href="trailers.php"><div class="top-btn">Zwiastuny</div></a>
@@ -174,15 +174,56 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
           //  $ocenaa ="Nie oceniono tego filmu";
           }
           $rezultat6->free_result();
-        }else{
-
-        }
+        }else{}
 
      }
 
       }else{}
       $rezultat4->free_result();
     }else{}
+
+
+
+
+      if($rezultat4 =@$conn->query("SELECT * FROM `series` where series_title in (SELECT title from movies_rated WHERE login = '$lgin')") ){
+        if($rezultat4->num_rows>0){
+          $oceny ='<h2>twoje oceny</h2>';
+
+        $i=0;
+        while($wiersz = $rezultat4->fetch_assoc()){
+
+          $idd[$i] = $wiersz['id'];
+          $tytul[$i]=$wiersz['series_title'];
+          $dlugosc[$i] = $wiersz['ep_runtime'];
+          $d[$i] = $wiersz['start_year'];
+          $d2[$i] = $wiersz['end_year'];
+
+          $i=$i+1;
+        }
+
+        for ($x = 0; $x < $i; $x++) {
+          if($rezultat6 =@$conn->query("SELECT grade FROM movies_rated WHERE title='$tytul[$x]' and login = '$lgin'") ){
+            if($rezultat6->num_rows>0){
+
+            $wiersz6 = $rezultat6->fetch_assoc();
+            $twoja = $wiersz6['grade'];
+            //$ocenaa = "Film oceniono na $ocenka / 5";
+            $filmys .= "<li><a class='nv' href='series/$idd[$x].php'><div class='film-div'><div class='mini-poster'><img src='style/img/seriesposters/$idd[$x].jpg' alt='movie poster' style='width: 90px; height: 130px;'></div><div class='mini-info-box'><h3 class='tit'>$tytul[$x] ($d[$x] - $d2[$x])</h3> <i class='iii'>$dlugosc[$x] min</i></div> <span id='srd'>Twoja ocena: $twoja </span></div></a></li>";
+
+            }else{
+            //  $ocenaa ="Nie oceniono tego filmu";
+            }
+            $rezultat6->free_result();
+          }else{}
+
+       }
+
+        }else{}
+        $rezultat4->free_result();
+      }else{}
+
+
+
 
       if($rezultat44 =@$conn->query("SELECT * FROM reviews where author_nick='$lgin'") ){
         if($rezultat44->num_rows>0){
@@ -194,7 +235,7 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
           $tyt[$i] = $wiersz44['title'];
           $tytul[$i] = $wiersz44['review_title'];
           $zdj[$i]=$wiersz44['image'];
-          $calytyt[$i] = $tytul[$i].' - Recenzja filmu '.$tyt[$i];
+          $calytyt[$i] = $tytul[$i].' - Recenzja '.$tyt[$i];
 
           $i=$i+1;
         }
@@ -221,7 +262,7 @@ echo<<<END
   <span>$lgin</span>
 
   <ul id="tenul">
-    <li><p>Liczba ocenionych filmów: $liczba_ocen </li>
+    <li><p>Liczba ocenionych filmów i seriali: $liczba_ocen </li>
     <li><p>Twój czas spędzony na oglądaniu filmów to : $czas minut</li>
   </ul>
   </div>

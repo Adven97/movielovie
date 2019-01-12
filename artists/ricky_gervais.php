@@ -13,7 +13,7 @@ require_once '../connect.php';
       $mainid =1;
       $artist_name ="Ricky";
       $artist_lname ="Gervais";
-      $img_name="noname";
+      $img_name="rickygerva";
       $castheader ="";
       $castheader2 ="";
       $crewheader ="";

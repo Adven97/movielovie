@@ -14,6 +14,7 @@ h1 {
 #tenul{
   margin-top: 60px;
     list-style: none;
+    width: 500px;
 }
 p{
   font-family: 'Poppins', sans-serif;

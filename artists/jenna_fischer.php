@@ -13,7 +13,7 @@ require_once '../connect.php';
       $mainid =1;
       $artist_name ="Jenna";
       $artist_lname ="Fischer";
-      $img_name="noname";
+      $img_name="jennafish";
       $castheader ="";
       $castheader2 ="";
       $crewheader ="";
