@@ -26,7 +26,7 @@ require_once '../connect.php';
           $idd = $wiersz['id'];
           $tytul = $wiersz['article_title'];
           $tresc = $wiersz['article'];
-          $tresc =nl2br($tresc);
+          
           $zddj = $wiersz['image'];
 
 

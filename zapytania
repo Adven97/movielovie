@@ -150,11 +150,35 @@ INSERT INTO `movies` (`id`, `movie_title`, `org_title`, `release_date`, `runtime
 
 
 
+INSERT INTO `cast` (`id`, `name`, `last_name`, `role`, `title`) VALUES
+(null, 'Ryan','Gosling', 'Sebastian', 'La La Land'),
+(null, 'John','Legend', 'Keith', 'La La Land'),
+(null, 'Rosemarie','DeWitt', 'Laura', 'La La Land'),
+(null, 'Finn','Wittrock', 'Greg', 'La La Land'),
+(null, 'Callie','Hernandez', 'Tracy', 'La La Land'),
+(null, 'Sonoya','Mizuno', 'Caitlin', 'La La Land'),
+(null, 'Jessica','Rothe', 'Alexis', 'La La Land'),
+(null, 'Tom ','Everett Scott', 'David', 'La La Land'),
+(null, 'Josh','Pence', 'Josh', 'La La Land'),
+(null, 'J.K.','Simmons', 'Bill', 'La La Land');
+
+INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
+(null, 'Ryan','Gosling', '1980-11-12', 'USA'),
+(null, 'John','Legend', '1978-12-28', 'USA'),
+(null, 'Rosemarie','DeWitt', '0000-00-77', 'USA'),
+(null, 'Finn','Wittrock', '0000-00-77', 'USA'),
+(null, 'Callie','Hernandez', '0000-00-77', 'USA'),
+(null, 'Sonoya','Mizuno', '0000-00-77', 'USA'),
+(null, 'Jessica','Rothe', '0000-00-77', 'USA'),
+(null, 'Tom ','Everett Scott', '0000-00-77', 'USA'),
+(null, 'Josh','Pence', '0000-00-77', 'USA'),
+(null, 'J.K.','Simmons', '1955-1-9', 'La La Land');
 
 
-
-
-
+INSERT INTO `artist` (`id`, `name`, `last_name`, `birth_day`, `country`) VALUES
+(null, 'Tom','Cross', '0000-00-77', 'USA'),
+(null, 'Justin','Hurwitz', '1985-1-22', 'USA'),
+(null, 'Linus','Sandgren', '1972-12-5', 'Szwecja');
 
 
 

@@ -57,8 +57,8 @@ if (isset($_POST['email']))
             $_SESSION['e_haslo']="Podane hasła nie są identyczne!";
         }
 
-        $haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);
-
+        //$haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);
+          $haslo1 = md5($haslo1);
         $_SESSION['fr_imie'] = $imie;
         $_SESSION['fr_nazwisko'] = $nazwisko;
         $_SESSION['fr_login'] = $login;

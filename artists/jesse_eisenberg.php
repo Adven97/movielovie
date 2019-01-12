@@ -14,7 +14,6 @@ require_once '../connect.php';
       $artist_name ="Jesse";
       $artist_lname ="Eisenberg";
       $img_name="jesse_eisenberg";
-
       $castheader ="";
       $crewheader ="";
 
@@ -94,16 +93,16 @@ require_once '../connect.php';
   <style>
   .span0{
     margin-left: 10px;
-    margin-right: 45px;
+    margin-right: 25px;
   }
   .span1{
-    margin-right: 180px;
+    margin-right: 80px;
   }
   .span2{
-    margin-left: 180px;
+    margin-left: 80px;
   }
   .aktor{
-    width: 550px;
+    width: 450px;
     height: 35px;
     background-color:#D9D9D9;
   }
@@ -150,7 +149,7 @@ require_once '../connect.php';
 <?php
 echo<<<END
     <div class="poster">
-     <img src='../style/img/$img_name.jpg' style='max-width: 214px; max-height: 317px;' />
+     <img src='../style/img/people/$img_name.jpg' style='max-width: 214px; max-height: 317px;' />
     </div>
 
     <div class="info-box">

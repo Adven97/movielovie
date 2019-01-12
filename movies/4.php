@@ -25,6 +25,7 @@ require_once '../connect.php';
 
           $tytul=$wiersz['movie_title'];
           $runtime = $wiersz['runtime'];
+          $kraj = $wiersz['country'];
           $data= $wiersz['release_date'];
           $opis = $wiersz['synopsis'];
           $date = DateTime::createFromFormat("Y-m-d", $data);
@@ -33,6 +34,28 @@ require_once '../connect.php';
               }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
 
           $rezultat->free_result();
+        }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+
+        if($rezultat00 =@$polaczenie->query("SELECT * FROM genres WHERE title='$tytul'") ){
+          if($rezultat00->num_rows>0){
+            $i=0;
+            while($wiersz00 = $rezultat00->fetch_assoc()){
+
+              $genn[$i] = $wiersz00['genre'];
+
+
+              $i=$i+1;
+            }
+            $genress="";
+            for ($x = 0; $x < $i; $x++) {
+             $genress .= "$genn[$x]";
+             $genress .= ", ";
+           }
+           $genres =substr($genress, 0, -2);
+
+          }else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
+          $rezultat00->free_result();
         }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
 
 
@@ -77,6 +100,9 @@ require_once '../connect.php';
            $actor_site =strtolower($writer_name[$x])."_".strtolower($writer_lname[$x]);
            $scenary .= "<a class='pcast2' href='../artists/$actor_site.php'>$writer_name[$x] $writer_lname[$x]</a> ";
            $scenary .= ", ";
+           if(($x%2) ==1){
+             $scenary .= "<br>";
+           }
          }
          $scenary =substr($scenary, 0, -2);
 
@@ -209,7 +235,7 @@ require_once '../connect.php';
 
           for ($x = $i-1; $x >=0; $x--) {
            $link ="reviews/review+".$iddd[$x];
-           $reviews .= "<a class='artik' href='reviews/$link.php'><p>$calytyt[$x]<br><i> Recenzja użytkownika $imierec[$x] $nazwiskorec[$x]</i></p></a>";
+           $reviews .= "<a class='artik' href='reviews/$link.php'><p>$calytyt[$x]<br><i> Autor: $imierec[$x] $nazwiskorec[$x]</i></p></a>";
          }
 
           }else{}
@@ -245,7 +271,7 @@ require_once '../connect.php';
   }
 
   .btn {
-    background-color: #4CAF50; /* Green */
+    background-color: #606060; /* Green */
     border: none;
     color: white;
     padding: 10px 24px;
@@ -262,7 +288,37 @@ require_once '../connect.php';
 .btn:hover{
   transform: scale(1.08);
   transition: .3s;
-  background-color: #3bAe40;
+  background-color: #505050;
+}
+
+.btn2 {
+  background-color: #606060; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+   display: inline-block;
+  align-self: flex-start;
+  font-size: 16px;
+  margin-top: 45px;
+  margin-left:15px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.btn2:hover{
+transform: scale(1.08);
+transition: .3s;
+background-color: #505050;
+}
+#tuut{
+  display: inline-flex;
+}
+#tuobsada{
+  display: block;
+}
+#tutworcy{
+  display: none;
 }
   </style>
 
@@ -304,7 +360,7 @@ require_once '../connect.php';
   </div>
     <div class="poster">
       <?php
-      echo "<img src='../style/img/$mainid.jpg' style='max-width: 300px; max-height: 520px;' />";
+      echo "<img src='../style/img/movieposters/$mainid.jpg' style='max-width: 300px; max-height: 520px;' />";
       ?>
     </div>
 
@@ -317,10 +373,10 @@ echo<<<END
 <ul>
   <li><span class = "runtime">Czas trwania: $runtime min.</span></li>
   <li><div class ='kred'><p class="credit">Reżyseria: <a class="person">$directorzy</a> </p></div></li>
-  <li><div class ='kred'><p class="credit">Scenariusz: <a class="person">$scenary</a></p></div></li>
-  <li><div class ='kred'><p class="credit">Zdjęcia: <a class="person">$zdje</a></p></div></li>
-  <li><div class ='kred'><p class="credit">Muzyka: <a class="person">$muzz</a></p></div></li>
-  <li><div class ='kred'><p class="credit">Montaż: <a class="person">$mont</a></p></div></li>
+  <li><div class ='kredmain'><p class="credit">Scenariusz: <a class="person">$scenary</a></p></div></li>
+  <li><div class ='kred'><p class="credit">Gatunek: <a class="person">$genres</a></p></div></li>
+  <li><div class ='kred'><p class="credit">Produkcja: <a class="person">$kraj</a></p></div></li>
+  <li><div class ='kred'><p class="credit">Premiera: <a class="person">$data</a></p></div></li>
 </ul>
 
 <article><p class="artic"><i>$opis</i></p></article>
@@ -346,8 +402,15 @@ echo<<<END
 </div>
 $prycisk
 <div class="obsada">
-  <h1 class="title">Obsada</h1>
-  <ul>$obsada</ul>
+  <div id='tuut'><h1 id="titlee">Obsada</h1><button class ='btn2' onClick="showCreators();">Pokaż twórców</button></div>
+  <div id='tuobsada'><ul>$obsada</ul></div>
+  <div id='tutworcy'><ul>
+    <li><p class='pcast'>Reżyseria: <a class="person">$directorzy</a> </p></li>
+    <li><p class='pcast'>Scenariusz: <a class="person">$scenary</a> </p></li>
+    <li><p class='pcast'>Zdjęcia: <a class="person">$zdje</a> </p></li>
+    <li><p class='pcast'>Muzyka: <a class="person">$muzz</a> </p></li>
+    <li><p class='pcast'>Montaż: <a class="person">$mont</a> </p></li>
+  </ul></div>
   <div class="newsfeed_rev">
     $recheder
     <article>
@@ -358,6 +421,26 @@ $prycisk
 
 END
 ?>
+
+<script>
+
+function showCreators() {
+  if(document.getElementById("titlee").innerHTML== "Obsada"){
+   document.getElementById("titlee").innerHTML= "Twórcy";
+   document.getElementById("tuobsada").style.display= "none";
+   document.getElementById("tutworcy").style.display= "block";
+   document.querySelector('.btn2').innerHTML ="Pokaż obsadę";
+ }
+ else{
+   document.getElementById("titlee").innerHTML= "Obsada";
+   document.getElementById("tuobsada").style.display= "block";
+   document.getElementById("tutworcy").style.display= "none";
+   document.querySelector('.btn2').innerHTML ="Pokaż twórców";
+ }
+
+
+}
+</script>
 
 <script>
 
@@ -517,6 +600,10 @@ function insertKurwa(){
 }
    ?>
 }
+
+
+
+
 
 </script>
 </body>

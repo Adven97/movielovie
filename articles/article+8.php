@@ -25,7 +25,7 @@ require_once '../connect.php';
           $idd = 8;
           $tytul = $tyt;
           $tresc = $artykul;
-          $tresc =nl2br($tresc);
+          
           $zddj = $fileNameNew;
 
 

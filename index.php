@@ -1,10 +1,12 @@
 <?php
 session_start();
 
+
 require_once 'connect.php';
 
     $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
     $polaczenie->set_charset("utf8");
+    $reviews='';
 
     if($polaczenie->connect_errno !=0){
       echo "Error ".$polaczenie->connect_errno;
@@ -55,8 +57,37 @@ require_once 'connect.php';
         }
         else{echo "<script type='text/javascript'>alert('niepyklo');</script>";}
         $rezultat44->free_result();
-
         }else{echo "<script type='text/javascript'>alert('chyuj');</script>";}
+
+
+        if($rezultat44 =@$polaczenie->query("SELECT * FROM reviews") ){
+          if($rezultat44->num_rows>0){
+          $recheder='<h2>Recenzje użytkownika</h2>';
+          $i=0;
+          while($wiersz44 = $rezultat44->fetch_assoc()){
+
+            $iddd[$i] = $wiersz44['id'];
+            $tytxdxd[$i] = $wiersz44['title'];
+            $tytulrec[$i] = $wiersz44['review_title'];
+
+            $imierec[$i] = $wiersz44['author_name'];
+            $nazwiskorec[$i] = $wiersz44['author_last_name'];
+
+            $zdj[$i]=$wiersz44['image'];
+            $calytyt[$i] = $tytulrec[$i].' - Recenzja filmu '.$tytxdxd[$i];
+
+            $i=$i+1;
+          }
+
+          for ($x = $i-1; $x >=$i-3; $x--) {
+           $link ="reviews/review+".$iddd[$x];
+           $reviews .= "<a class='artik' href='reviews/$link.php'><p>$calytyt[$x]<br><i> Autor: $imierec[$x] $nazwiskorec[$x]</i></p></a>";
+         }
+
+          }else{}
+          $rezultat44->free_result();
+        }else{}
+
 
         $polaczenie->close();
         }
@@ -75,6 +106,15 @@ require_once 'connect.php';
   .artic:hover{
     transform: scale(1.08);
     transition: .3s
+  }
+  .artik, .artik:visited, .artik:active{
+     text-decoration: none;
+     color: #100000;
+  }
+   a.artik:hover{
+
+    text-decoration: underline;
+    color: #000000;
   }
   </style>
 
@@ -105,7 +145,7 @@ require_once 'connect.php';
     <div style="clear:both"></div>
     <div id="button-bar">
     <a href="movies.php"><div class="top-btn">Filmy</div></a>
-    <a href="#"><div class="top-btn">Seriale</div></a>
+    <a href="series.php"><div class="top-btn">Seriale</div></a>
     <a href="#"><div class="top-btn">Ludzie kina</div></a>
     <a href="articles.php"><div class="top-btn">Newsy</div></a>
     <a href="reviews.php"><div class="top-btn">Recenzje</div></a>
@@ -118,20 +158,14 @@ require_once 'connect.php';
         <?php echo $articles ?>
 
         <h2>zwiastuny</h2>
-
          <?php echo $trailers ?>
-
-         <h2>dobre filmy</h2>
-         <div class="filmy">
-           <p class="film"><a class="movi" href="movies/3.php">Cloverfield Lane 10</a></p>
-           <p class="film"><a class="movi" href="movies/1.php">Zombiland</a></p>
-           <p class="film"><a class="movi" href="movies/2.php">Ciche mjejsce</a></p>
-         </div>
+         <h2>OSTATNIO dodane recenzje</h2>
+          <?php echo $reviews ?>
 
       </article>
     </div>
     </div>
   </div>
-
+<footer><div id='ftr'>&copy; MovieLovie.com - Adam Tomczak (2019),  All rights reserved</div></footer>
 </body>
 </html>

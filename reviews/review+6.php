@@ -27,7 +27,7 @@ require_once '../connect.php';
           $tytt = $wiersz['title'];
           $tytul = $wiersz['review_title'];
           $tresc = $wiersz['review'];
-          $tresc =nl2br($tresc);
+          
           $zddj = $wiersz['image'];
           $calytyt = $tytul.' - Recenzja filmu '.$tytt;
 

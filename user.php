@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -99,12 +100,12 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
      ?>
     <div style="clear:both"></div>
     <div id="button-bar">
-      <a href="movies.php"><div class="top-btn">filmy</div></a>
-      <a href="#"><div class="top-btn">seriale</div></a>
-      <a href="#"><div class="top-btn">ludzie kina</div></a>
-      <a href="articles.php"><div class="top-btn">newsy</div></a>
-      <a href="#"><div class="top-btn">premiery</div></a>
-      <a href="#"><div class="top-btn">zwiastuny</div></a>
+      <a href="movies.php"><div class="top-btn">Filmy</div></a>
+      <a href="series.php"><div class="top-btn">Seriale</div></a>
+      <a href="#"><div class="top-btn">Ludzie kina</div></a>
+      <a href="articles.php"><div class="top-btn">Newsy</div></a>
+      <a href="reviews.php"><div class="top-btn">Recenzje</div></a>
+      <a href="trailers.php"><div class="top-btn">Zwiastuny</div></a>
     </div>
   </div>
   <div style="clear:both"></div>
@@ -119,6 +120,9 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
       $lgin = $_SESSION['login'];
       $filmys="";
       $reviews="";
+
+      $recenzje ='';
+      $oceny ='';
 
     $conn = @new mysqli($host, $db_user, $db_password, $db_name);
     $conn->set_charset("utf8");
@@ -142,6 +146,7 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
 
     if($rezultat4 =@$conn->query("SELECT * FROM `movies` where movie_title in (SELECT title from movies_rated WHERE login = '$lgin')") ){
       if($rezultat4->num_rows>0){
+        $oceny ='<h2>twoje oceny</h2>';
 
       $i=0;
       while($wiersz = $rezultat4->fetch_assoc()){
@@ -163,7 +168,7 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
           $wiersz6 = $rezultat6->fetch_assoc();
           $twoja = $wiersz6['grade'];
           //$ocenaa = "Film oceniono na $ocenka / 5";
-          $filmys .= "<li><a class='nv' href='movies/$idd[$x].php'><div class='film-div'><div class='mini-poster'><img src='style/img/$idd[$x].jpg' alt='movie poster' style='width: 90px; height: 130px;'></div><div class='mini-info-box'><h3 class='tit'>$tytul[$x] ($d[$x])</h3> <i class='iii'>$dlugosc[$x] min</i></div> <span id='srd'>Twoja ocena: $twoja </span></div></a></li>";
+          $filmys .= "<li><a class='nv' href='movies/$idd[$x].php'><div class='film-div'><div class='mini-poster'><img src='style/img/movieposters/$idd[$x].jpg' alt='movie poster' style='width: 90px; height: 130px;'></div><div class='mini-info-box'><h3 class='tit'>$tytul[$x] ($d[$x])</h3> <i class='iii'>$dlugosc[$x] min</i></div> <span id='srd'>Twoja ocena: $twoja </span></div></a></li>";
 
           }else{
           //  $ocenaa ="Nie oceniono tego filmu";
@@ -181,7 +186,7 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
 
       if($rezultat44 =@$conn->query("SELECT * FROM reviews where author_nick='$lgin'") ){
         if($rezultat44->num_rows>0){
-
+          $recenzje='<h2>Recenzje</h2>';
         $i=0;
         while($wiersz44 = $rezultat44->fetch_assoc()){
 
@@ -221,14 +226,14 @@ echo<<<END
   </ul>
   </div>
   <div class="newsfeed2">
-    <h2>twoje oceny</h2>
+    $oceny
     <div class="filmys">
       <ul>$filmys
       </ul>
     </div>
   </div>
   <div class="newsfeed">
-    <h2>Recenzje użytkownika</h2>
+    $recenzje
     <article>
        $reviews
     </article>
@@ -239,6 +244,6 @@ END
   </div>
 </div>
 
-
+<footer><div id='ftr'>&copy; MovieLovie.com - Adam Tomczak (2019),  All rights reserved</div></footer>
 </body>
 </html>

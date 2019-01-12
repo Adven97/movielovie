@@ -19,6 +19,7 @@ require_once 'connect.php';
       $haslo = $_POST['Hasło'];
       $login=htmlentities($login, ENT_QUOTES, "UTF-8");
       $haslo=htmlentities($haslo, ENT_QUOTES, "UTF-8");
+      $haslo =md5($haslo);
 
       $sql="SELECT * FROM users WHERE login='$login' AND password='$haslo'";
 

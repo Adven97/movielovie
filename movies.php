@@ -35,7 +35,7 @@ require_once 'connect.php';
             $wiersz6 = $rezultat6->fetch_assoc();
             $srednia = $wiersz6['avgrade'];
             //$ocenaa = "Film oceniono na $ocenka / 5";
-            $filmys .= "<li><a class='nv' href='movies/$idd[$x].php'><div class='film-div'><div class='mini-poster'><img src='style/img/$idd[$x].jpg' alt='movie poster' style='width: 90px; height: 130px;'></div><div class='mini-info-box'><h3 class='tit'>$tytul[$x] ($d[$x])</h3> <i class='iii'>$dlugosc[$x] min</i></div> <span id='srd'>Średnia ocena: $srednia </span></div></a></li>";
+            $filmys .= "<li><a class='nv' href='movies/$idd[$x].php'><div class='film-div'><div class='mini-poster'><img src='style/img/movieposters/$idd[$x].jpg' alt='movie poster' style='width: 90px; height: 130px;'></div><div class='mini-info-box'><h3 class='tit'>$tytul[$x] ($d[$x])</h3> <i class='iii'>$dlugosc[$x] min</i></div> <span id='srd'>Średnia ocena: $srednia </span></div></a></li>";
 
             }else{
             //  $ocenaa ="Nie oceniono tego filmu";
@@ -156,6 +156,6 @@ a.nv, a.nv:visited, a.nv:hover, a.nv:active{
     </div>
   </div>
 
-
+<footer><div id='ftr'>&copy; MovieLovie.com - Adam Tomczak (2019),  All rights reserved</div></footer>
 </body>
 </html>

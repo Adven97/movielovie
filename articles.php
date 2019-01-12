@@ -115,6 +115,6 @@ require_once 'connect.php';
     </div>
   </div>
 
-
+<footer><div id='ftr'>&copy; MovieLovie.com - Adam Tomczak (2019),  All rights reserved</div></footer>
 </body>
 </html>

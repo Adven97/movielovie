@@ -30,7 +30,7 @@ require_once '../connect.php';
           $idd = $wiersz['id'];
           $tytul = $wiersz['article_title'];
           $tresc = $wiersz['article'];
-          $tresc =nl2br($tresc);
+          
           $zddj = $wiersz['image'];
 
 
@@ -337,8 +337,22 @@ END;
   <div class="tyt">
     <a class="active" href="../index.php">MovieLovie.com</a>
     <input class="sb" type="text" placeholder="Search..">
-    <a href="../register.php"><div class="log-btn">zarejstruj sie</div></a>
-    <a href="../login.php"><div class="log-btn">zaloguj sie</div></a>
+    <?php
+    if(isset($_SESSION['zalogowany'])){
+      $supr = $_SESSION['ln'];
+      $imie= $_SESSION['name'];
+      $nazwisko = $_SESSION['last_name'];
+      $login = $_SESSION['login'];
+      echo "<div id='login_name'><a href='../user.php'><img class='avatar' src="."'../style/img/avatars/$supr.jpg'"." height='50' width='50'>ELO $imie $nazwisko</a>";
+      echo "<div id='how'>";
+      echo '<ul> <li><a href="../logout.php">wyloguj sie</a></li></ul></div></div>';
+
+    }
+    else{
+    echo '<a href="../register.php"><div class="log-btn">zarejstruj sie</div></a>';
+    echo '<a href="../login.php"><div class="log-btn">zaloguj sie</div></a>';
+   }
+     ?>
     <div style="clear:both"></div>
     <div id="button-bar">
     <a href="../movies.php"><div class="top-btn">filmy</div></a>

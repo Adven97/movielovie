@@ -149,7 +149,7 @@ require_once '../connect.php';
 <?php
 echo<<<END
     <div class="poster">
-     <img src='../style/img/$img_name.jpg' style='max-width: 214px; max-height: 317px;' />
+     <img src='../style/img/people/$img_name.jpg' style='max-width: 214px; max-height: 317px;' />
     </div>
 
     <div class="info-box">
